@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { FiStar, FiUser, FiEdit3, FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { FiStar, FiUser, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { reviews } from "../data/reviews";
 import "./Reviews.stunning.css";
 
@@ -11,19 +11,9 @@ const Reviews = () => {
     triggerOnce: true,
   });
 
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [step, setStep] = useState(0);
 
-  useEffect(() => {
-    if (isLoginModalOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isLoginModalOpen]);
+  // Review writing/auth UI removed per requirement.
   const [direction, setDirection] = useState(1);
   const [isPaused, setIsPaused] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
@@ -240,55 +230,7 @@ const Reviews = () => {
           </div>
         </div>
 
-        {/* Write Review CTA */}
-        <motion.div 
-          className="write-review-cta"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1 }}
-        >
-          <motion.button
-            className="write-review-btn"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setIsLoginModalOpen(true)}
-          >
-            <FiEdit3 />
-            Write Your Review
-          </motion.button>
-        </motion.div>
       </div>
-
-      {/* Login Modal for Reviews */}
-      <AnimatePresence>
-        {isLoginModalOpen && (
-          <motion.div
-            className="review-modal-overlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setIsLoginModalOpen(false)}
-          >
-            <motion.div
-              className="review-modal"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <h3>Share Your Experience</h3>
-              <p>Please <strong>sign in</strong> to leave a review</p>
-              <div className="modal-buttons">
-                <button className="btn-login">Sign In</button>
-                <button className="btn-signup">Create Account</button>
-                <button className="btn-cancel" onClick={() => setIsLoginModalOpen(false)}>
-                  Cancel
-                </button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </section>
   );
 };

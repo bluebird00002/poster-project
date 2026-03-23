@@ -157,24 +157,6 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Auth Buttons */}
-        <div className="navbar-auth">
-          <motion.button
-            className="navbar-auth-btn navbar-signin"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Sign In
-          </motion.button>
-          <motion.button
-            className="navbar-auth-btn navbar-signup"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Sign Up
-          </motion.button>
-        </div>
-
         {/* Hamburger Menu */}
         <motion.button
           className="hamburger"
@@ -227,14 +209,6 @@ const Navbar = () => {
                 </Link>
               )
             )}
-            <div className="mobile-auth">
-              <button className="mobile-auth-btn mobile-signin" onClick={() => setIsOpen(false)}>
-                Sign In
-              </button>
-              <button className="mobile-auth-btn mobile-signup" onClick={() => setIsOpen(false)}>
-                Sign Up
-              </button>
-            </div>
           </motion.div>
         )}
       </AnimatePresence>

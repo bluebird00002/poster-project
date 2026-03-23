@@ -163,16 +163,14 @@ const PortfolioPage = () => {
 
   const [selectedIds, setSelectedIds] = useState([]);
   const [modalProduct, setModalProduct] = useState(null);
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [pendingAddItem, setPendingAddItem] = useState(null);
 
   useEffect(() => {
-    if (modalProduct || isAuthModalOpen) document.body.style.overflow = "hidden";
+    if (modalProduct) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [modalProduct, isAuthModalOpen]);
+  }, [modalProduct]);
 
   const priceMin = priceMinInput ? Number(priceMinInput) : null;
   const priceMax = priceMaxInput ? Number(priceMaxInput) : null;
@@ -260,10 +258,6 @@ const PortfolioPage = () => {
     return portfolio.filter((p) => selectedSet.has(p.id));
   }, [selectedIds]);
 
-  const addToSelection = (item) => {
-    setSelectedIds((prev) => (prev.includes(item.id) ? prev : [...prev, item.id]));
-  };
-
   const buildWhatsAppMessage = (items) => {
     const lines = items.map((p) => {
       const finalPrice = getFinalPrice(p);
@@ -292,22 +286,10 @@ const PortfolioPage = () => {
 
   const closeModal = () => setModalProduct(null);
 
-  const closeAuthModal = () => {
-    setIsAuthModalOpen(false);
-    setPendingAddItem(null);
-  };
-
-  const proceedAfterAuth = () => {
-    if (pendingAddItem) addToSelection(pendingAddItem);
-    setPendingAddItem(null);
-    setIsAuthModalOpen(false);
-  };
-
   const onCardAddClick = (e, item) => {
+    // Stop propagation so clicking the card CTA doesn't open the product modal.
     e.stopPropagation();
-    if (selectedIds.includes(item.id)) return;
-    setPendingAddItem(item);
-    setIsAuthModalOpen(true);
+    requestOrder([item]);
   };
 
   const totalCount = portfolio.length;
@@ -545,14 +527,13 @@ const PortfolioPage = () => {
                   </div>
                 ) : (
                   filteredPortfolio.map((item) => {
-                    const isSelected = selectedIds.includes(item.id);
                     const finalPrice = getFinalPrice(item);
                     const hasDiscount = (item.discountPercent || 0) > 0;
                     const updatedLabel = formatRelativeUpdated(item.updatedAt);
                     return (
                       <motion.div
                         key={item.id}
-                        className={`product-card ${isSelected ? "selected" : ""}`}
+                        className="product-card"
                         layout
                         whileHover={{ y: -6 }}
                         onClick={() => setModalProduct(item)}
@@ -618,24 +599,13 @@ const PortfolioPage = () => {
                           <div className="product-actions">
                             <button
                               type="button"
-                              className={`order-add-btn ${isSelected ? "is-added" : ""}`}
+                              className="order-add-btn"
                               onClick={(e) => onCardAddClick(e, item)}
                             >
-                              {isSelected ? (
-                                <>
-                                  <span className="btn-icon" style={{ color: "rgba(34, 197, 94, 0.95)" }}>
-                                    <IconCheck />
-                                  </span>
-                                  Added
-                                </>
-                              ) : (
-                                <>
-                                  <span className="btn-icon">
-                                    <IconPlus />
-                                  </span>
-                                  Add to Order
-                                </>
-                              )}
+                              <span className="btn-icon">
+                                <IconPlus />
+                              </span>
+                              Place Order
                             </button>
                             <div className="product-secondary-action">View details</div>
                           </div>
@@ -708,18 +678,6 @@ const PortfolioPage = () => {
                     </div>
 
                     <div className="popup-actions">
-                      <button
-                        type="button"
-                        className="popup-secondary-btn"
-                        onClick={() => {
-                          if (!modalProduct) return;
-                          if (selectedIds.includes(modalProduct.id)) return;
-                          setPendingAddItem(modalProduct);
-                          setIsAuthModalOpen(true);
-                        }}
-                      >
-                        Add to Order
-                      </button>
                       <button type="button" className="popup-primary-btn" onClick={placeOrderFromModal}>
                         Place Order
                       </button>
@@ -734,43 +692,6 @@ const PortfolioPage = () => {
           )}
         </AnimatePresence>
         
-        {/* Auth Modal */}
-        <AnimatePresence>
-          {isAuthModalOpen && (
-            <motion.div
-              className="auth-modal-overlay"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={closeAuthModal}
-            >
-              <motion.div
-                className="auth-modal"
-                initial={{ scale: 0.85, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.85, opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <h3>Login required</h3>
-                <p>
-                  Please <strong>sign in</strong> or <strong>create an account</strong> to add products to your order.
-                </p>
-                <div className="modal-buttons">
-                  <button type="button" className="btn-login" onClick={proceedAfterAuth}>
-                    Sign In
-                  </button>
-                  <button type="button" className="btn-signup" onClick={proceedAfterAuth}>
-                    Create Account
-                  </button>
-                  <button type="button" className="btn-cancel" onClick={closeAuthModal}>
-                    Cancel
-                  </button>
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
         </div>
       </section>
       <Footer />
