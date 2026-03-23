@@ -2,9 +2,11 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { portfolio } from "../data/portfolio";
+import { useLanguage } from "../i18n/LanguageContext";
 import "./Portfolio.css";
 
 const Portfolio = () => {
+  const { t } = useLanguage();
   const portfolioItems = portfolio.slice(0, 4);
 
   const containerVariants = {
@@ -38,10 +40,10 @@ const Portfolio = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="section-title">
-            Our Portfolio
+            {t("portfolioTitle")}
             <span className="title-underline" />
           </h2>
-          <p className="section-subtitle">Featured Designs</p>
+          <p className="section-subtitle">{t("portfolioSubtitle")}</p>
         </motion.div>
 
         {/* Portfolio Grid - Static 4 items */}
@@ -81,7 +83,7 @@ const Portfolio = () => {
               whileHover={{ scale: 1.05 }} 
               whileTap={{ scale: 0.95 }}
             >
-              View Products
+              {t("portfolioCta")}
             </motion.button>
           </Link>
         </motion.div>

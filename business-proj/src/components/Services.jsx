@@ -5,9 +5,11 @@ import { Link as ScrollLink } from "react-scroll";
 import * as Icons from "react-icons/md";
 import { services } from "../data/services";
 import { colors } from "../theme";
+import { useLanguage } from "../i18n/LanguageContext";
 import "./Services.css";
 
 const Services = () => {
+  const { t } = useLanguage();
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true,
@@ -49,11 +51,11 @@ const Services = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="section-title">
-            Our Services
+            {t("servicesTitle")}
             <span className="title-underline" />
           </h2>
           <p className="section-subtitle">
-            Comprehensive printing and branding solutions tailored to your business needs
+            {t("servicesSubtitle")}
           </p>
         </motion.div>
 
@@ -106,7 +108,7 @@ const Services = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Place an Order
+              {t("servicesCta")}
             </motion.button>
           </ScrollLink>
         </motion.div>

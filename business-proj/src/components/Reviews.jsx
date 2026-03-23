@@ -3,9 +3,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { FiStar, FiUser, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { reviews } from "../data/reviews";
+import { useLanguage } from "../i18n/LanguageContext";
 import "./Reviews.stunning.css";
 
 const Reviews = () => {
+  const { t } = useLanguage();
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true,
@@ -139,9 +141,9 @@ const Reviews = () => {
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
         >
-          <motion.h2 className="section-title">Real Client Stories</motion.h2>
+          <motion.h2 className="section-title">{t("reviewsTitle")}</motion.h2>
           <motion.p className="section-subtitle">
-            Don't just take our word for it – see what our clients have to say about their experience
+            {t("reviewsSubtitle")}
           </motion.p>
         </motion.div>
 
@@ -201,7 +203,7 @@ const Reviews = () => {
               type="button"
               className="reviews-step-btn"
               onClick={goPrev}
-              aria-label="Previous reviews"
+              aria-label={t("reviewsPrev")}
               disabled={totalSteps <= 1}
             >
               <FiChevronLeft />
@@ -213,7 +215,7 @@ const Reviews = () => {
               type="button"
               className="reviews-step-btn"
               onClick={goNext}
-              aria-label="Next reviews"
+              aria-label={t("reviewsNext")}
               disabled={totalSteps <= 1}
             >
               <FiChevronRight />

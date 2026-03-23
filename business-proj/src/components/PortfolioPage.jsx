@@ -6,6 +6,7 @@ import Footer from "./Footer";
 import FloatingWhatsApp from "./FloatingWhatsApp";
 import { portfolio, portfolioCategories } from "../data/portfolio";
 import { config } from "../config";
+import { useLanguage } from "../i18n/LanguageContext";
 import "./PortfolioPage.css";
 
 const formatTZS = (amount) => {
@@ -92,28 +93,13 @@ const IconPlus = ({ className = "" }) => (
   </svg>
 );
 
-const IconCheck = ({ className = "" }) => (
-  <svg
-    className={className}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-  >
-    <path d="M20 6 9 17l-5-5" />
-  </svg>
-);
-
-const formatRelativeUpdated = (updatedAt) => {
-  if (!updatedAt) return "Recently updated";
+const formatRelativeUpdated = (updatedAt, t) => {
+  if (!updatedAt) return t("recentlyUpdated");
   const updatedMs = new Date(updatedAt).getTime();
-  if (!Number.isFinite(updatedMs)) return "Recently updated";
+  if (!Number.isFinite(updatedMs)) return t("recentlyUpdated");
 
   const diffMs = Date.now() - updatedMs;
-  if (diffMs < 0) return "Recently updated";
+  if (diffMs < 0) return t("recentlyUpdated");
 
   const minutes = Math.floor(diffMs / (1000 * 60));
   if (minutes < 60) {
@@ -141,6 +127,7 @@ const formatRelativeUpdated = (updatedAt) => {
 };
 
 const PortfolioPage = () => {
+  const { t } = useLanguage();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -261,11 +248,11 @@ const PortfolioPage = () => {
   const buildWhatsAppMessage = (items) => {
     const lines = items.map((p) => {
       const finalPrice = getFinalPrice(p);
-      return `• ${p.title} (${p.category}) - ${formatTZS(finalPrice)} per piece - Delivery: ${p.turnaroundLabel}`;
+      return `• ${p.title} (${p.category}) - ${formatTZS(finalPrice)} ${t("perPiece")} - ${t("delivery")} ${p.turnaroundLabel}`;
     });
-    return `Hello ${config.businessName},\n\nI'm interested in the following designs:\n${lines.join(
+    return `${t("helloBusiness", { name: config.businessName })}\n\n${t("interestInDesigns")}\n${lines.join(
       "\n"
-    )}\n\nPlease share availability, payment details, and next steps.`;
+    )}\n\n${t("shareAvailability")}`;
   };
 
   const requestOrder = (items) => {
@@ -307,9 +294,9 @@ const PortfolioPage = () => {
             animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="section-title">Our Products</h1>
+            <h1 className="section-title">{t("productsTitle")}</h1>
             <p className="section-subtitle">
-              Browse designs and request an order. All prices are per piece.
+              {t("productsSubtitle")}
             </p>
           </motion.div>
 
@@ -325,13 +312,13 @@ const PortfolioPage = () => {
                 <div className="filters-top">
                   <div className="search-wrap">
                     <label className="control-label" htmlFor="portfolio-search">
-                      Search
+                      {t("search")}
                     </label>
                     <div className="search-input-wrap">
                       <input
                         id="portfolio-search"
                         className="control-input"
-                        placeholder="Search by title, category, features..."
+                        placeholder={t("searchPlaceholder")}
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                       />
@@ -340,7 +327,7 @@ const PortfolioPage = () => {
 
                   <div className="sort-wrap">
                     <label className="control-label" htmlFor="portfolio-sort">
-                      Sort
+                      {t("sort")}
                     </label>
                     <select
                       id="portfolio-sort"
@@ -348,15 +335,15 @@ const PortfolioPage = () => {
                       value={sortBy}
                       onChange={(e) => setSortBy(e.target.value)}
                     >
-                      <option value="recommended">Recommended</option>
-                      <option value="newest">Newest</option>
-                      <option value="priceLow">Lowest Price</option>
-                      <option value="discountHigh">Highest Discount</option>
+                      <option value="recommended">{t("sortRecommended")}</option>
+                      <option value="newest">{t("sortNewest")}</option>
+                      <option value="priceLow">{t("sortPriceLow")}</option>
+                      <option value="discountHigh">{t("sortDiscountHigh")}</option>
                     </select>
                   </div>
                 </div>
 
-                <div className="category-bar" aria-label="Product categories">
+                <div className="category-bar" aria-label={t("productCategories")}>
                   {portfolioCategories.map((category) => (
                     <button
                       key={category}
@@ -372,7 +359,7 @@ const PortfolioPage = () => {
                 <div className="filters-grid">
                   <div className="control">
                     <label className="control-label" htmlFor="price-min">
-                      Price min (TZS per piece)
+                      {t("priceMin")}
                     </label>
                     <input
                       id="price-min"
@@ -386,7 +373,7 @@ const PortfolioPage = () => {
 
                   <div className="control">
                     <label className="control-label" htmlFor="price-max">
-                      Price max (TZS per piece)
+                      {t("priceMax")}
                     </label>
                     <input
                       id="price-max"
@@ -400,7 +387,7 @@ const PortfolioPage = () => {
 
                   <div className="control">
                     <label className="control-label" htmlFor="discount-min">
-                      Min discount
+                      {t("minDiscount")}
                     </label>
                     <select
                       id="discount-min"
@@ -408,7 +395,7 @@ const PortfolioPage = () => {
                       value={discountMin}
                       onChange={(e) => setDiscountMin(Number(e.target.value))}
                     >
-                      <option value={0}>Any</option>
+                      <option value={0}>{t("any")}</option>
                       <option value={10}>10%+</option>
                       <option value={15}>15%+</option>
                       <option value={20}>20%+</option>
@@ -422,7 +409,7 @@ const PortfolioPage = () => {
                         checked={discountOnly}
                         onChange={(e) => setDiscountOnly(e.target.checked)}
                       />
-                      Show discounted only
+                      {t("showDiscountedOnly")}
                     </label>
                   </div>
 
@@ -433,13 +420,13 @@ const PortfolioPage = () => {
                         checked={offerOnly}
                         onChange={(e) => setOfferOnly(e.target.checked)}
                       />
-                      Has offer label
+                      {t("hasOfferLabel")}
                     </label>
                   </div>
 
                   <div className="control">
                     <label className="control-label" htmlFor="turnaround-max">
-                      Max delivery time
+                      {t("maxDeliveryTime")}
                     </label>
                     <select
                       id="turnaround-max"
@@ -447,17 +434,17 @@ const PortfolioPage = () => {
                       value={turnaroundMax}
                       onChange={(e) => setTurnaroundMax(e.target.value)}
                     >
-                      <option value="any">Any</option>
-                      <option value={3}>Up to 3 days</option>
-                      <option value={5}>Up to 5 days</option>
-                      <option value={7}>Up to 7 days</option>
-                      <option value={14}>Up to 14 days</option>
+                      <option value="any">{t("any")}</option>
+                      <option value={3}>{t("upTo3Days")}</option>
+                      <option value={5}>{t("upTo5Days")}</option>
+                      <option value={7}>{t("upTo7Days")}</option>
+                      <option value={14}>{t("upTo14Days")}</option>
                     </select>
                   </div>
 
                   <div className="control">
                     <label className="control-label" htmlFor="updated-within">
-                      Recently updated
+                      {t("recentlyUpdated")}
                     </label>
                     <select
                       id="updated-within"
@@ -465,17 +452,17 @@ const PortfolioPage = () => {
                       value={updatedWithin}
                       onChange={(e) => setUpdatedWithin(e.target.value)}
                     >
-                      <option value="any">Any time</option>
-                      <option value={30}>Last 30 days</option>
-                      <option value={90}>Last 90 days</option>
-                      <option value={180}>Last 180 days</option>
+                      <option value="any">{t("anyTime")}</option>
+                      <option value={30}>{t("last30Days")}</option>
+                      <option value={90}>{t("last90Days")}</option>
+                      <option value={180}>{t("last180Days")}</option>
                     </select>
                   </div>
                 </div>
 
                 <div className="filters-footer">
                   <div className="results-hint">
-                    Showing <strong>{showingCount}</strong> of <strong>{totalCount}</strong> products
+                    {t("showingProducts", { showing: showingCount, total: totalCount })}
                   </div>
                   <div className="filters-footer-actions">
                     {selectedProducts.length > 0 && (
@@ -484,7 +471,7 @@ const PortfolioPage = () => {
                         className="request-selected-btn"
                         onClick={() => requestOrder(selectedProducts)}
                       >
-                        Request {selectedProducts.length} quote
+                        {t("requestQuote", { count: selectedProducts.length })}
                       </button>
                     )}
                     <button
@@ -503,7 +490,7 @@ const PortfolioPage = () => {
                         setSortBy("recommended");
                       }}
                     >
-                      Reset
+                      {t("reset")}
                     </button>
                   </div>
                 </div>
@@ -519,17 +506,17 @@ const PortfolioPage = () => {
               >
                 {filteredPortfolio.length === 0 ? (
                   <div className="empty-state">
-                    <div className="empty-title">No products match your filters.</div>
-                    <div className="empty-subtitle">Try a different category, price, or delivery time.</div>
+                    <div className="empty-title">{t("noProductsTitle")}</div>
+                    <div className="empty-subtitle">{t("noProductsSubtitle")}</div>
                     <button type="button" className="empty-reset" onClick={() => setQuery("")}>
-                      Clear search
+                      {t("clearSearch")}
                     </button>
                   </div>
                 ) : (
                   filteredPortfolio.map((item) => {
                     const finalPrice = getFinalPrice(item);
                     const hasDiscount = (item.discountPercent || 0) > 0;
-                    const updatedLabel = formatRelativeUpdated(item.updatedAt);
+                    const updatedLabel = formatRelativeUpdated(item.updatedAt, t);
                     return (
                       <motion.div
                         key={item.id}
@@ -550,11 +537,11 @@ const PortfolioPage = () => {
                           <div className="product-badges">
                             <span className="badge badge-category">{item.category}</span>
                             {hasDiscount ? (
-                              <span className="badge badge-discount">Save {item.discountPercent}%</span>
+                              <span className="badge badge-discount">{t("savePercent", { value: item.discountPercent })}</span>
                             ) : item.offerLabel ? (
                               <span className="badge badge-offer">{item.offerLabel}</span>
                             ) : (
-                              <span className="badge badge-discount badge-discount--none">No Discount</span>
+                              <span className="badge badge-discount badge-discount--none">{t("noDiscount")}</span>
                             )}
                           </div>
                         </div>
@@ -566,10 +553,10 @@ const PortfolioPage = () => {
                                 <IconTag className="" />
                               </span>
                               {formatTZS(finalPrice)}
-                              <span className="price-unit"> per piece</span>
+                              <span className="price-unit"> {t("perPiece")}</span>
                             </div>
                             {hasDiscount ? (
-                              <div className="price-original">{formatTZS(item.basePrice)} per piece</div>
+                              <div className="price-original">{formatTZS(item.basePrice)} {t("perPiece")}</div>
                             ) : null}
                           </div>
 
@@ -579,7 +566,7 @@ const PortfolioPage = () => {
                                 <span className="meta-icon">
                                   <IconTruck />
                                 </span>
-                                Delivery:
+                                {t("delivery")}
                               </span>{" "}
                               {item.turnaroundLabel}
                             </span>
@@ -588,7 +575,7 @@ const PortfolioPage = () => {
                                 <span className="meta-icon">
                                   <IconClock />
                                 </span>
-                                Updated:
+                                {t("updated")}
                               </span>{" "}
                               {updatedLabel}
                             </span>
@@ -605,9 +592,9 @@ const PortfolioPage = () => {
                               <span className="btn-icon">
                                 <IconPlus />
                               </span>
-                              Place Order
+                              {t("placeOrder")}
                             </button>
-                            <div className="product-secondary-action">View details</div>
+                            <div className="product-secondary-action">{t("viewDetails")}</div>
                           </div>
                         </div>
                       </motion.div>
@@ -644,7 +631,7 @@ const PortfolioPage = () => {
                       <span className="badge badge-category">{modalProduct.category}</span>
                       {(modalProduct.discountPercent || 0) > 0 ? (
                         <span className="badge badge-discount">
-                          Save {modalProduct.discountPercent}%
+                          {t("savePercent", { value: modalProduct.discountPercent })}
                         </span>
                       ) : modalProduct.offerLabel ? (
                         <span className="badge badge-offer">{modalProduct.offerLabel}</span>
@@ -658,31 +645,31 @@ const PortfolioPage = () => {
                     <div className="popup-price-row">
                       <div className="popup-price-now">
                         {formatTZS(getFinalPrice(modalProduct))}
-                        <span className="price-unit"> per piece</span>
+                        <span className="price-unit"> {t("perPiece")}</span>
                       </div>
                       {(modalProduct.discountPercent || 0) > 0 ? (
                         <div className="popup-price-original">
-                          {formatTZS(modalProduct.basePrice)} per piece
+                          {formatTZS(modalProduct.basePrice)} {t("perPiece")}
                         </div>
                       ) : null}
                     </div>
 
                     <div className="popup-meta">
                       <div className="popup-meta-pill">
-                        <span className="meta-k">Delivery:</span> {modalProduct.turnaroundLabel}
+                        <span className="meta-k">{t("delivery")}</span> {modalProduct.turnaroundLabel}
                       </div>
                       <div className="popup-meta-pill">
-                        <span className="meta-k">Updated:</span>{" "}
-                        {formatRelativeUpdated(modalProduct.updatedAt)}
+                        <span className="meta-k">{t("updated")}</span>{" "}
+                        {formatRelativeUpdated(modalProduct.updatedAt, t)}
                       </div>
                     </div>
 
                     <div className="popup-actions">
                       <button type="button" className="popup-primary-btn" onClick={placeOrderFromModal}>
-                        Place Order
+                        {t("placeOrder")}
                       </button>
                       <button type="button" className="popup-cancel-btn" onClick={closeModal}>
-                        Cancel
+                        {t("cancel")}
                       </button>
                     </div>
                   </div>

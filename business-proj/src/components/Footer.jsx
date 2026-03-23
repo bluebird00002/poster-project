@@ -6,10 +6,12 @@ import { HiMail, HiPhone, HiLocationMarker } from "react-icons/hi";
 import { FaInstagram, FaTiktok, FaFacebook } from "react-icons/fa";
 import { colors } from "../theme";
 import { config } from "../config";
+import { useLanguage } from "../i18n/LanguageContext";
 import logoImg from "../assets/BussinessLogo.png";
 import "./Footer.css";
 
 const Footer = () => {
+  const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
   const location = useLocation();
   const isHomePage = location.pathname === "/";
@@ -20,12 +22,12 @@ const Footer = () => {
   };
 
   const quickLinks = [
-    { label: "Home", to: "home", type: "scroll" },
-    { label: "About", to: "about", type: "scroll" },
-    { label: "Services", to: "services", type: "scroll" },
+    { label: t("navHome"), to: "home", type: "scroll" },
+    { label: t("navAbout"), to: "about", type: "scroll" },
+    { label: t("navServices"), to: "services", type: "scroll" },
     // Navigate to the products page, not the `#portfolio` preview section.
-    { label: "Products", to: "/portfolio", type: "route" },
-    { label: "Contact", to: "contact", type: "scroll" },
+    { label: t("navProducts"), to: "/portfolio", type: "route" },
+    { label: t("navContact"), to: "contact", type: "scroll" },
   ];
 
   const containerVariants = {
@@ -96,7 +98,7 @@ const Footer = () => {
 
         {/* Center Column - Quick Links */}
         <motion.div className="footer-column" variants={itemVariants}>
-          <h4 className="footer-title">Quick Links</h4>
+          <h4 className="footer-title">{t("footerQuickLinks")}</h4>
           <nav className="footer-links">
             {quickLinks.map((link) => (
               link.type === "route" ? (
@@ -127,7 +129,7 @@ const Footer = () => {
 
         {/* Right Column - Contact */}
         <motion.div className="footer-column" variants={itemVariants}>
-          <h4 className="footer-title">Contact</h4>
+          <h4 className="footer-title">{t("footerContact")}</h4>
           <div className="footer-contact">
             <a href={`tel:${config.phone}`} className="footer-contact-item">
               <HiPhone size={18} />
@@ -154,10 +156,10 @@ const Footer = () => {
       >
         <div className="footer-divider" />
         <p className="footer-copyright">
-          &copy; {currentYear} {config.businessName}. All rights reserved.
+          &copy; {currentYear} {config.businessName}. {t("footerRights")}
         </p>
         <p className="footer-credit">
-          Built with passion for African businesses
+          {t("footerCredit")}
         </p>
       </motion.div>
     </footer>

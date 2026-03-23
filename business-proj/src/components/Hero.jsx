@@ -2,10 +2,12 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { colors } from "../theme";
+import { useLanguage } from "../i18n/LanguageContext";
 import logoImg from "../assets/BussinessLogo.png";
 import "./Hero.css";
 
 const Hero = () => {
+  const { t } = useLanguage();
   // Floating orb animation variants
   const orbVariants = {
     float: {
@@ -78,19 +80,18 @@ const Hero = () => {
         >
           {/* Badge */}
           <motion.div className="hero-badge" variants={itemVariants}>
-<span>Best Of Arts</span>
+<span>{t("heroBadge")}</span>
           </motion.div>
 
           {/* Main Heading */}
           <motion.h1 className="hero-title" variants={itemVariants}>
-            We Print. We{" "}
-            <span style={{ color: colors.accentOrange }}>Brand.</span> We Deliver.
+            {t("heroTitleStart")}{" "}
+            <span style={{ color: colors.accentOrange }}>{t("heroTitleAccent")}</span> {t("heroTitleEnd")}
           </motion.h1>
 
           {/* Subtext */}
           <motion.p className="hero-subtitle" variants={itemVariants}>
-            Professional printing and branding solutions that bring your vision to life with
-            quality, creativity, and precision.
+            {t("heroSubtitle")}
           </motion.p>
 
           {/* CTA Buttons */}
@@ -101,7 +102,7 @@ const Hero = () => {
               whileTap={{ scale: 0.95 }}
             >
               <Link to="/portfolio">
-                See Our Work
+                {t("heroCta")}
               </Link>
             </motion.button>
 

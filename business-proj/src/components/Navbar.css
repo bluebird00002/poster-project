@@ -71,6 +71,40 @@
   margin-left: 60px;
 }
 
+.navbar-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.language-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid rgba(249, 115, 22, 0.45);
+  border-radius: 999px;
+  background: rgba(16, 24, 40, 0.82);
+  color: #f8fafc;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.language-toggle:hover {
+  border-color: rgba(249, 115, 22, 0.95);
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.25);
+  background: rgba(30, 41, 59, 0.92);
+}
+
+.language-toggle:focus-visible {
+  outline: 2px solid rgba(29, 111, 232, 0.9);
+  outline-offset: 2px;
+}
+
 .nav-link {
   color: #a0aec0;
   text-decoration: none;
@@ -282,6 +316,16 @@
 
   .hamburger {
     display: block;
+  }
+
+  .navbar-controls {
+    gap: 8px;
+  }
+
+  .language-toggle {
+    height: 34px;
+    padding: 0 10px;
+    font-size: 11px;
   }
 
   .navbar-cta {

@@ -10,9 +10,11 @@ import {
 import { FaWhatsapp, FaInstagram, FaTiktok, FaFacebook } from "react-icons/fa";
 import { config } from "../config";
 import { colors } from "../theme";
+import { useLanguage } from "../i18n/LanguageContext";
 import "./Contact.css";
 
 const Contact = () => {
+  const { t } = useLanguage();
   const { ref, inView } = useInView({ threshold: 0.2, triggerOnce: true });
 
   const containerVariants = {
@@ -40,9 +42,9 @@ const Contact = () => {
         >
           {/* Left Column - Contact Info */}
           <motion.div className="contact-info" variants={itemVariants}>
-            <h2 className="section-title">Get In Touch</h2>
+            <h2 className="section-title">{t("contactTitle")}</h2>
             <p className="section-description">
-              Have a project in mind? We'd love to hear from you and help bring your vision to life.
+              {t("contactSubtitle")}
             </p>
 
             <div className="info-items">
@@ -53,7 +55,7 @@ const Contact = () => {
               >
                 <HiPhone className="info-icon" />
                 <div>
-                  <p className="info-label">Phone</p>
+                  <p className="info-label">{t("contactPhone")}</p>
                   <p className="info-text">{config.phone}</p>
                 </div>
               </motion.a>
@@ -65,7 +67,7 @@ const Contact = () => {
               >
                 <HiMail className="info-icon" />
                 <div>
-                  <p className="info-label">Email</p>
+                  <p className="info-label">{t("contactEmail")}</p>
                   <p className="info-text">{config.email}</p>
                 </div>
               </motion.a>
@@ -73,7 +75,7 @@ const Contact = () => {
               <motion.div className="info-item" whileHover={{ x: 10 }}>
                 <HiLocationMarker className="info-icon" />
                 <div>
-                  <p className="info-label">Location</p>
+                  <p className="info-label">{t("contactLocation")}</p>
                   <p className="info-text">{config.location}</p>
                 </div>
               </motion.div>
@@ -81,7 +83,7 @@ const Contact = () => {
               <motion.div className="info-item" whileHover={{ x: 10 }}>
                 <HiClock className="info-icon" />
                 <div>
-                  <p className="info-label">Working Hours</p>
+                  <p className="info-label">{t("contactHours")}</p>
                   <p className="info-text">{config.workingHours}</p>
                 </div>
               </motion.div>
@@ -96,7 +98,7 @@ const Contact = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <FaWhatsapp /> Chat on WhatsApp
+              <FaWhatsapp /> {t("chatOnWhatsApp")}
             </motion.a>
 
             {/* Social Links */}

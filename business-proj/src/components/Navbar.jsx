@@ -2,13 +2,15 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
-import { HiMenu, HiX } from "react-icons/hi";
+import { HiMenu, HiX, HiTranslate } from "react-icons/hi";
 import { colors } from "../theme";
 import { config } from "../config";
+import { useLanguage } from "../i18n/LanguageContext";
 import logoImg from "../assets/BussinessLogo.png";
 import "./Navbar.css";
 
 const Navbar = () => {
+  const { language, toggleLanguage, t } = useLanguage();
   const location = useLocation();
   const isHomePage = location.pathname === "/";
   const [isOpen, setIsOpen] = useState(false);
@@ -31,11 +33,11 @@ const Navbar = () => {
   });
 
   const navItems = [
-    { label: "Home", to: "home" },
-    { label: "About", to: "about" },
-    { label: "Services", to: "services" },
-    { label: "Products", to: "portfolio" },
-    { label: "Contact", to: "contact" },
+    { label: t("navHome"), to: "home" },
+    { label: t("navAbout"), to: "about" },
+    { label: t("navServices"), to: "services" },
+    { label: t("navProducts"), to: "portfolio" },
+    { label: t("navContact"), to: "contact" },
   ];
 
   // Track scroll position
@@ -157,14 +159,29 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Hamburger Menu */}
-        <motion.button
-          className="hamburger"
-          onClick={() => setIsOpen(!isOpen)}
-          whileTap={{ scale: 0.9 }}
-        >
-          {isOpen ? <HiX size={24} /> : <HiMenu size={24} />}
-        </motion.button>
+        <div className="navbar-controls">
+          <motion.button
+            type="button"
+            className="language-toggle"
+            onClick={toggleLanguage}
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.96 }}
+            aria-label={t("language")}
+            title={language === "en" ? t("switchToSw") : t("switchToEn")}
+          >
+            <HiTranslate size={18} />
+            <span>{language === "en" ? "SW" : "EN"}</span>
+          </motion.button>
+
+          {/* Hamburger Menu */}
+          <motion.button
+            className="hamburger"
+            onClick={() => setIsOpen(!isOpen)}
+            whileTap={{ scale: 0.9 }}
+          >
+            {isOpen ? <HiX size={24} /> : <HiMenu size={24} />}
+          </motion.button>
+        </div>
       </div>
 
       {/* Mobile Menu */}

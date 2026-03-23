@@ -3,10 +3,12 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import CountUpDefault, { CountUp as CountUpNamed } from "react-countup";
 import { colors } from "../theme";
+import { useLanguage } from "../i18n/LanguageContext";
 import "./About.css";
 import placeholderImg from "../assets/placeholder-image.jpg";
 
 const About = () => {
+  const { t } = useLanguage();
   const { ref, inView } = useInView({
     threshold: 0.3,
     triggerOnce: true,
@@ -56,26 +58,22 @@ const About = () => {
           {/* Left Column - Image */}
           <motion.div className="about-image" variants={itemVariants}>
             <div className="image-placeholder">
-              <img src={placeholderImg} alt="About Us" />
+              <img src={placeholderImg} alt={t("aboutImageAlt")} />
             </div>
             
           </motion.div>
 
           {/* Right Column - Text */}
           <motion.div className="about-text" variants={itemVariants}>
-            <span className="section-label">About Us</span>
-            <h2 className="section-title">Your Creative Partner in Print & Branding</h2>
+            <span className="section-label">{t("aboutLabel")}</span>
+            <h2 className="section-title">{t("aboutTitle")}</h2>
 
             <p className="section-description">
-              Since 2019, RicRaphix Studio has been helping businesses in Tanzania tell their
-              stories through exceptional printing and branding solutions. We combine creativity,
-              quality, and professionalism to deliver results that exceed expectations.
+              {t("aboutP1")}
             </p>
 
             <p className="section-description">
-              Our team of experienced designers and print specialists work closely with each client
-              to understand their unique needs and bring their vision to life with precision and
-              passion.
+              {t("aboutP2")}
             </p>
 
             
