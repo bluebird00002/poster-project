@@ -1,0 +1,489 @@
+.reviews {
+  width: 100%;
+  background: radial-gradient(
+    ellipse at top,
+    #0a0f1e 0%,
+    #0f1729 70%,
+    #1a1a2e 100%
+  );
+  padding: 120px 40px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.reviews::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #f97316, transparent);
+  opacity: 0.9;
+}
+
+.reviews-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(249, 115, 22, 0.15);
+  border: 1px solid rgba(249, 115, 22, 0.3);
+  color: #f97316;
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.section-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff 0%, #f97316 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 20px 0;
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  color: #a0aec0;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* Step Animation */
+.reviews-step-container {
+  margin-bottom: 60px;
+  position: relative;
+}
+
+.reviews-step-viewport {
+  overflow-x: hidden; /* requirement */
+  position: relative;
+  padding: 10px 0 18px;
+}
+
+.reviews-step-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(14px, 3vw, 28px);
+  align-items: stretch;
+  justify-items: stretch;
+  min-height: 360px; /* stable stage for smooth step swapping */
+}
+
+.review-card {
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  padding: 30px 28px;
+  border-radius: 26px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.09) 0%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.38);
+
+  will-change: transform, opacity, filter;
+
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+/* Controls */
+.reviews-step-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.reviews-step-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  color: #e2e8f0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.reviews-step-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: rgba(249, 115, 22, 0.12);
+  border-color: rgba(249, 115, 22, 0.35);
+  box-shadow: 0 20px 60px rgba(249, 115, 22, 0.12);
+}
+
+.reviews-step-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.reviews-step-counter {
+  color: rgba(226, 232, 240, 0.85);
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  font-size: 14px;
+}
+
+.review-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 26px;
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.75), rgba(29, 111, 232, 0.65));
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 0;
+}
+
+.review-card::after {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: -60%;
+  width: 120%;
+  height: 140%;
+  transform: rotate(18deg);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.20) 40%,
+    transparent 80%
+  );
+  opacity: 0;
+  z-index: 0;
+  animation: sheen 5.5s ease-in-out infinite;
+}
+
+.review-card:hover::before {
+  opacity: 1;
+}
+
+.review-card:hover {
+  transform: translateY(-10px) scale(1.01);
+  border-color: rgba(249, 115, 22, 0.35);
+  box-shadow: 0 38px 120px rgba(0, 0, 0, 0.48);
+}
+
+@keyframes sheen {
+  0%,
+  35% {
+    opacity: 0;
+    transform: translateX(-20%) rotate(18deg);
+  }
+  55% {
+    opacity: 1;
+    transform: translateX(30%) rotate(18deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(60%) rotate(18deg);
+  }
+}
+
+/* Card contents */
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 22px;
+  position: relative;
+  z-index: 1;
+}
+
+.review-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(249, 115, 22, 1), rgba(29, 111, 232, 1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+  flex-shrink: 0;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+}
+
+.review-meta {
+  flex: 1;
+}
+
+.client-name {
+  color: white;
+  font-weight: 800;
+  font-size: 16px;
+  margin: 0 0 4px 0;
+}
+
+.review-rating {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 4px;
+  align-items: center;
+}
+
+.star-filled {
+  color: #f97316;
+  filter: drop-shadow(0 0 6px rgba(249, 115, 22, 0.35));
+}
+
+.star-empty {
+  color: rgba(148, 163, 184, 0.65);
+}
+
+.client-business {
+  color: #a0aec0;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.review-content {
+  position: relative;
+  z-index: 1;
+}
+
+.review-text {
+  color: #e2e8f0;
+  font-size: 16px;
+  line-height: 1.75;
+  font-style: italic;
+  margin: 0;
+}
+
+.reviews-step-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+.dot-active {
+  background: rgba(249, 115, 22, 0.9);
+  border-color: rgba(249, 115, 22, 0.45);
+  transform: scale(1.2);
+  box-shadow: 0 0 20px rgba(249, 115, 22, 0.25);
+}
+
+/* CTA */
+.write-review-cta {
+  text-align: center;
+}
+
+.write-review-btn {
+  background: transparent;
+  color: #f97316;
+  border: 2px solid #f97316;
+  padding: 16px 40px;
+  border-radius: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.write-review-btn:hover {
+  background: rgba(249, 115, 22, 0.12);
+  border-color: rgba(249, 115, 22, 0.6);
+  transform: translateY(-2px);
+}
+
+/* Modal */
+.review-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 15, 30, 0.40) 0%,
+    rgba(10, 15, 30, 0.52) 100%
+  );
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+.review-modal {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+}
+
+.review-modal h3 {
+  color: white;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.review-modal p {
+  color: #cbd5e1;
+  margin-bottom: 32px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.modal-buttons button {
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-login {
+  background: transparent;
+  color: #a0aec0;
+  border: 2px solid #a0aec0;
+}
+
+.btn-login:hover {
+  background: #a0aec0;
+  color: #0f1729;
+}
+
+.btn-signup {
+  background: #f97316;
+  color: white;
+}
+
+.btn-signup:hover {
+  background: #ea580c;
+}
+
+.btn-cancel {
+  background: transparent;
+  color: #64748b;
+  border: 2px solid #64748b;
+}
+
+.btn-cancel:hover {
+  background: #64748b;
+  color: #0f1729;
+}
+
+/* Responsive - Mobile: 1 card full width per iteration */
+@media (max-width: 768px) {
+  .reviews {
+    padding: 80px 16px;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+  }
+
+  .reviews-step-row {
+    min-height: 340px;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .review-card {
+    width: 100%;
+    min-width: 0;
+    padding: 24px 20px;
+    border-radius: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .reviews {
+    padding: 60px 12px;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .reviews-step-row {
+    min-height: 320px;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .review-card {
+    width: 100%;
+    min-width: 0;
+    padding: 20px 18px;
+  }
+
+  .review-text {
+    font-size: 15px;
+  }
+
+  .modal-buttons {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 1024px) {
+  .reviews-step-row {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    min-height: 330px;
+  }
+
+  .review-card {
+    padding: 28px 20px;
+    border-radius: 24px;
+  }
+
+  .review-card::before,
+  .review-card::after {
+    border-radius: 24px;
+  }
+}
+
