@@ -12,7 +12,7 @@ export const portfolio = [
     turnaroundLabel: "3-5 days",
     turnaroundDays: 4,
     updatedAt: "2026-03-12",
-    discountPercent: 15,
+    discountPercent: 16,
   },
   {
     id: 2,
