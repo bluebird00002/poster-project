@@ -141,9 +141,7 @@ const PortfolioPage = () => {
   const [query, setQuery] = useState("");
   const [priceMinInput, setPriceMinInput] = useState("");
   const [priceMaxInput, setPriceMaxInput] = useState("");
-  const [discountOnly, setDiscountOnly] = useState(false);
-  const [discountMin, setDiscountMin] = useState(10);
-  const [offerOnly, setOfferOnly] = useState(false);
+  const [discountFilter, setDiscountFilter] = useState("all"); // 'all', 'discounted', 'noDiscount'
   const [turnaroundMax, setTurnaroundMax] = useState("any"); // days
   const [updatedWithin, setUpdatedWithin] = useState("any"); // days
   const [sortBy, setSortBy] = useState("recommended");
@@ -177,9 +175,6 @@ const PortfolioPage = () => {
         const haystack = [
           item.title,
           item.category,
-          (item.features || []).join(" "),
-          item.specs,
-          item.offerLabel,
         ]
           .filter(Boolean)
           .join(" ")
@@ -190,14 +185,17 @@ const PortfolioPage = () => {
 
     items = items.filter((item) => {
       const finalPrice = getFinalPrice(item);
+      const discount = Number(item.discountPercent || 0);
+      
       if (priceMin !== null && finalPrice < priceMin) return false;
       if (priceMax !== null && finalPrice > priceMax) return false;
-      if (discountOnly) {
-        if ((item.discountPercent || 0) < discountMin) return false;
+      
+      if (discountFilter === "discounted") {
+        if (discount === 0) return false;
+      } else if (discountFilter === "noDiscount") {
+        if (discount > 0) return false;
       }
-      if (offerOnly) {
-        if (!item.offerLabel || !item.offerLabel.trim()) return false;
-      }
+      
       if (turnaroundMaxDays !== null) {
         if (Number(item.turnaroundDays || 0) > turnaroundMaxDays) return false;
       }
@@ -229,9 +227,7 @@ const PortfolioPage = () => {
     return items;
   }, [
     activeCategory,
-    discountMin,
-    discountOnly,
-    offerOnly,
+    discountFilter,
     priceMax,
     priceMin,
     q,
@@ -386,42 +382,19 @@ const PortfolioPage = () => {
                   </div>
 
                   <div className="control">
-                    <label className="control-label" htmlFor="discount-min">
-                      {t("minDiscount")}
+                    <label className="control-label" htmlFor="discount-filter">
+                      {t("discount")}
                     </label>
                     <select
-                      id="discount-min"
+                      id="discount-filter"
                       className="control-select"
-                      value={discountMin}
-                      onChange={(e) => setDiscountMin(Number(e.target.value))}
+                      value={discountFilter}
+                      onChange={(e) => setDiscountFilter(e.target.value)}
                     >
-                      <option value={0}>{t("any")}</option>
-                      <option value={10}>10%+</option>
-                      <option value={15}>15%+</option>
-                      <option value={20}>20%+</option>
+                      <option value="all">{t("all")}</option>
+                      <option value="discounted">{t("onlyDiscounted")}</option>
+                      <option value="noDiscount">{t("noDiscount")}</option>
                     </select>
-                  </div>
-
-                  <div className="control toggle">
-                    <label className="toggle-label">
-                      <input
-                        type="checkbox"
-                        checked={discountOnly}
-                        onChange={(e) => setDiscountOnly(e.target.checked)}
-                      />
-                      {t("showDiscountedOnly")}
-                    </label>
-                  </div>
-
-                  <div className="control toggle">
-                    <label className="toggle-label">
-                      <input
-                        type="checkbox"
-                        checked={offerOnly}
-                        onChange={(e) => setOfferOnly(e.target.checked)}
-                      />
-                      {t("hasOfferLabel")}
-                    </label>
                   </div>
 
                   <div className="control">
@@ -538,8 +511,6 @@ const PortfolioPage = () => {
                             <span className="badge badge-category">{item.category}</span>
                             {hasDiscount ? (
                               <span className="badge badge-discount">{t("savePercent", { value: item.discountPercent })}</span>
-                            ) : item.offerLabel ? (
-                              <span className="badge badge-offer">{item.offerLabel}</span>
                             ) : (
                               <span className="badge badge-discount badge-discount--none">{t("noDiscount")}</span>
                             )}
@@ -633,8 +604,6 @@ const PortfolioPage = () => {
                         <span className="badge badge-discount">
                           {t("savePercent", { value: modalProduct.discountPercent })}
                         </span>
-                      ) : modalProduct.offerLabel ? (
-                        <span className="badge badge-offer">{modalProduct.offerLabel}</span>
                       ) : null}
                     </div>
                   </div>

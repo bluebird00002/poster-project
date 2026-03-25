@@ -13,9 +13,6 @@ export const portfolio = [
     turnaroundDays: 4,
     updatedAt: "2026-03-12",
     discountPercent: 15,
-    offerLabel: "Limited Discount",
-    features: ["High-impact color", "Durable vinyl finish", "Quick proofing"],
-    specs: "Custom sizes • UV-resistant",
   },
   {
     id: 2,
@@ -27,9 +24,6 @@ export const portfolio = [
     turnaroundDays: 5,
     updatedAt: "2026-03-07",
     discountPercent: 10,
-    offerLabel: "Bundle Offer",
-    features: ["Matte anti-glare look", "Strong hems & poles", "Brand-ready design"],
-    specs: "Custom sizes • Weather-ready",
   },
   {
     id: 3,
@@ -41,9 +35,6 @@ export const portfolio = [
     turnaroundDays: 6,
     updatedAt: "2026-03-18",
     discountPercent: 0,
-    offerLabel: "",
-    features: ["Premium cotton", "Vibrant print", "Care instructions included"],
-    specs: "S-XXL • DTG/DTF print",
   },
   {
     id: 4,
@@ -55,9 +46,6 @@ export const portfolio = [
     turnaroundDays: 5,
     updatedAt: "2026-03-14",
     discountPercent: 12,
-    offerLabel: "Save on Bulk",
-    features: ["Consistent color matching", "Durable wash performance", "Corporate-ready"],
-    specs: "Team orders • Logo files accepted",
   },
   {
     id: 5,
@@ -69,9 +57,6 @@ export const portfolio = [
     turnaroundDays: 3,
     updatedAt: "2026-03-20",
     discountPercent: 20,
-    offerLabel: "Design Rush",
-    features: ["2-3 revision rounds", "Vector delivery", "Color variants included"],
-    specs: "AI-ready formats • Transparent PNG/SVG",
   },
   {
     id: 6,
@@ -83,9 +68,6 @@ export const portfolio = [
     turnaroundDays: 4,
     updatedAt: "2026-03-09",
     discountPercent: 8,
-    offerLabel: "",
-    features: ["Brand identity system", "Typography pairing", "High-resolution export"],
-    specs: "SVG/PNG • Print & web ready",
   },
   {
     id: 7,
@@ -97,9 +79,6 @@ export const portfolio = [
     turnaroundDays: 3,
     updatedAt: "2026-03-15",
     discountPercent: 18,
-    offerLabel: "Flash Offer",
-    features: ["Crisp typography", "Premium paper options", "Multiple size formats"],
-    specs: "A5/A4 • High-clarity print",
   },
   {
     id: 8,
@@ -111,9 +90,6 @@ export const portfolio = [
     turnaroundDays: 4,
     updatedAt: "2026-03-06",
     discountPercent: 5,
-    offerLabel: "",
-    features: ["Eye-catching layout", "Color calibration", "Fast delivery scheduling"],
-    specs: "A5/A4 • Double-sided available",
   },
   {
     id: 9,
@@ -125,9 +101,6 @@ export const portfolio = [
     turnaroundDays: 3,
     updatedAt: "2026-03-21",
     discountPercent: 25,
-    offerLabel: "Best Value",
-    features: ["Die-cut precision", "Water-resistant laminate", "Strong adhesive"],
-    specs: "Matte/Gloss • Custom shapes",
   },
   {
     id: 10,
@@ -139,9 +112,6 @@ export const portfolio = [
     turnaroundDays: 6,
     updatedAt: "2026-03-11",
     discountPercent: 0,
-    offerLabel: "",
-    features: ["Large format clarity", "Premium finishing", "Proofing support"],
-    specs: "Wide sizes • UV-resistant",
   },
   {
     id: 11,
@@ -153,9 +123,6 @@ export const portfolio = [
     turnaroundDays: 5,
     updatedAt: "2026-03-16",
     discountPercent: 13,
-    offerLabel: "Opening Deal",
-    features: ["Colorfast inks", "Reinforced edges", "Brand-matched design"],
-    specs: "Custom sizes • Quick setup",
   },
   {
     id: 12,
@@ -167,9 +134,6 @@ export const portfolio = [
     turnaroundDays: 7,
     updatedAt: "2026-03-08",
     discountPercent: 9,
-    offerLabel: "Team Pricing",
-    features: ["Bulk consistency", "Comfort fit", "Logo placement assistance"],
-    specs: "Bulk order • S-XXL",
   },
   {
     id: 13,
@@ -181,9 +145,6 @@ export const portfolio = [
     turnaroundDays: 6,
     updatedAt: "2026-03-19",
     discountPercent: 16,
-    offerLabel: "Event Special",
-    features: ["Color-accurate prints", "Durable inks", "Design-to-print support"],
-    specs: "Event batches • DTG/DTF",
   },
   {
     id: 14,
@@ -195,9 +156,6 @@ export const portfolio = [
     turnaroundDays: 3,
     updatedAt: "2026-03-17",
     discountPercent: 10,
-    offerLabel: "Brand Pack",
-    features: ["Logo variants", "Color palette guidance", "File organization"],
-    specs: "SVG/PNG • Brand-ready",
   },
   {
     id: 15,
@@ -209,9 +167,6 @@ export const portfolio = [
     turnaroundDays: 3,
     updatedAt: "2026-03-10",
     discountPercent: 0,
-    offerLabel: "",
-    features: ["Startup-friendly concept", "Revision support", "Print and digital exports"],
-    specs: "Editable files • PNG/SVG",
   },
   {
     id: 16,
@@ -223,9 +178,6 @@ export const portfolio = [
     turnaroundDays: 4,
     updatedAt: "2026-03-13",
     discountPercent: 14,
-    offerLabel: "Launch Deal",
-    features: ["High-contrast layout", "Quality paper pick", "Proofing turnaround"],
-    specs: "A5/A4 • Single/Double sided",
   },
   {
     id: 17,
@@ -237,9 +189,6 @@ export const portfolio = [
     turnaroundDays: 5,
     updatedAt: "2026-03-02",
     discountPercent: 6,
-    offerLabel: "",
-    features: ["Elegant typography", "Premium cardstock options", "Print-ready finishing"],
-    specs: "A5 • Optional emboss look",
   },
   {
     id: 18,
@@ -251,9 +200,6 @@ export const portfolio = [
     turnaroundDays: 3,
     updatedAt: "2026-03-22",
     discountPercent: 22,
-    offerLabel: "New Stock Offer",
-    features: ["Durable laminate", "Crisp edges", "Brand matching support"],
-    specs: "Label sheets • Die-cut available",
   },
   {
     id: 19,
@@ -265,9 +211,6 @@ export const portfolio = [
     turnaroundDays: 5,
     updatedAt: "2026-03-04",
     discountPercent: 9,
-    offerLabel: "",
-    features: ["Conference-ready size", "Strong reinforcement", "Color calibration"],
-    specs: "Wide format • UV-resistant",
   },
   {
     id: 20,
@@ -279,9 +222,6 @@ export const portfolio = [
     turnaroundDays: 7,
     updatedAt: "2026-03-03",
     discountPercent: 11,
-    offerLabel: "Merch Promo",
-    features: ["Merch-proof durability", "Vibrant branding", "Design assistance"],
-    specs: "Bulk friendly • DTG/DTF",
   },
 ];
 
