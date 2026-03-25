@@ -1,13 +1,14 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { portfolio } from "../data/portfolio";
+import { works } from "../data/works";
 import { useLanguage } from "../i18n/LanguageContext";
 import "./Portfolio.css";
 
 const Portfolio = () => {
-  const { t } = useLanguage();
-  const portfolioItems = portfolio.slice(0, 4);
+  const { t, language } = useLanguage();
+  const portfolioItems = works.slice(0, 4);
+
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -53,17 +54,19 @@ const Portfolio = () => {
           initial="hidden"
           animate="visible"
         >
-          {portfolioItems.map((item, index) => (
+          {portfolioItems.map((work) => (
             <motion.div
-              key={item.id}
+              key={work.id}
               className="portfolio-item"
               variants={itemVariants}
             >
               <div className="portfolio-image">
-                <img src={item.image} alt={item.title} />
+                <img src={work.image} alt={work.titleEn} />
                 <div className="portfolio-overlay">
-                  <span className="portfolio-category">{item.category}</span>
-                  <p className="portfolio-title">{item.title}</p>
+                  <span className="portfolio-category">{t("workTag")}</span>
+                  <p className="portfolio-title">
+                    {language === "sw" ? work.titleSw || work.titleEn : work.titleEn}
+                  </p>
                 </div>
               </div>
             </motion.div>
@@ -77,7 +80,7 @@ const Portfolio = () => {
           animate={{ opacity: 1, y: 0 }} 
           transition={{ delay: 0.5 }}
         >
-          <Link to="/portfolio">
+          <Link to="/works">
             <motion.button 
               className="see-more-btn" 
               whileHover={{ scale: 1.05 }} 

@@ -21,14 +21,16 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: min(480px, 45vw);
-  height: min(480px, 45vw);
+  width: min(500px, 48vw);
+  height: min(500px, 48vw);
+  background-image: url('../assets/BussinessLogo.png');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.06;
+  opacity: 0.08;
   pointer-events: none;
   z-index: 1;
+  animation: watermarkFloat 12s ease-in-out infinite;
 }
 
 /* Floating Orbs */
@@ -241,3 +243,4 @@
     width: 100%;
   }
 }
+

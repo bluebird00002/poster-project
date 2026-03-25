@@ -8,6 +8,7 @@ const translations = {
     navAbout: "About",
     navServices: "Services",
     navProducts: "Products",
+    navWorks: "Portfolio",
     navContact: "Contact",
     language: "Language",
     switchToSw: "Switch to Swahili",
@@ -31,11 +32,11 @@ const translations = {
 
     servicesTitle: "Our Services",
     servicesSubtitle: "Comprehensive printing and branding solutions tailored to your business needs",
-    servicesCta: "Place an Order",
+    servicesCta: "View Products",
 
     portfolioTitle: "Our Portfolio",
     portfolioSubtitle: "Featured Designs",
-    portfolioCta: "View Products",
+    portfolioCta: "View more works",
 
     reviewsTitle: "Real Client Stories",
     reviewsSubtitle: "Don't just take our word for it - see what our clients have to say about their experience",
@@ -98,12 +99,18 @@ const translations = {
     helloBusiness: ({ name }) => `Hello ${name},`,
     interestInDesigns: "I'm interested in the following designs:",
     shareAvailability: "Please share availability, payment details, and next steps.",
+
+    worksTitle: "Our Works",
+    worksSubtitle: "A showcase of the projects we have delivered so far.",
+    interestInWork: "I'm interested in the following work:",
+    workTag: "Works",
   },
   sw: {
     navHome: "Nyumbani",
     navAbout: "Kuhusu",
     navServices: "Huduma",
     navProducts: "Bidhaa",
+    navWorks: "Portfolio",
     navContact: "Mawasiliano",
     language: "Lugha",
     switchToSw: "Badili kwenda Kiswahili",
@@ -127,11 +134,11 @@ const translations = {
 
     servicesTitle: "Huduma Zetu",
     servicesSubtitle: "Suluhisho jumuishi za uchapishaji na utambulisho wa biashara zinazoendana na mahitaji ya biashara yako",
-    servicesCta: "Weka Oda",
+    servicesCta: "Tazama Bidhaa",
 
     portfolioTitle: "Kazi Zetu",
     portfolioSubtitle: "Miundo Iliyochaguliwa",
-    portfolioCta: "Tazama Bidhaa",
+    portfolioCta: "Tazama kazi zaidi",
 
     reviewsTitle: "Ushuhuda wa Wateja",
     reviewsSubtitle: "Soma maoni ya wateja wetu kuhusu huduma na matokeo waliyopata",
@@ -194,6 +201,11 @@ const translations = {
     helloBusiness: ({ name }) => `Habari ${name},`,
     interestInDesigns: "Ninavutiwa na miundo ifuatayo:",
     shareAvailability: "Naomba mnitumie upatikanaji, utaratibu wa malipo, pamoja na hatua zinazofuata.",
+
+    worksTitle: "Kazi Zetu",
+    worksSubtitle: "Mfano wa miradi tuliyokwisha kuwasilisha kwa sasa.",
+    interestInWork: "Ninavutiwa na kazi ifuatayo:",
+    workTag: "Kazi",
   },
 };
 

@@ -78,10 +78,7 @@ const Hero = () => {
           initial="hidden"
           animate="visible"
         >
-          {/* Badge */}
-          <motion.div className="hero-badge" variants={itemVariants}>
-<span>{t("heroBadge")}</span>
-          </motion.div>
+
 
           {/* Main Heading */}
           <motion.h1 className="hero-title" variants={itemVariants}>

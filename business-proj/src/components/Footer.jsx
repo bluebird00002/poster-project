@@ -27,6 +27,7 @@ const Footer = () => {
     { label: t("navServices"), to: "services", type: "scroll" },
     // Navigate to the products page, not the `#portfolio` preview section.
     { label: t("navProducts"), to: "/portfolio", type: "route" },
+    { label: t("navWorks"), to: "/works", type: "route" },
     { label: t("navContact"), to: "contact", type: "scroll" },
   ];
 

@@ -25,7 +25,7 @@ function Home() {
  <div className='sections mid'>
  
 
-  <div className='badge'>Bets of Arts</div>
+
   <div className='title'>We Print. We Brand. We Deliver.</div>
   <div className='description'>Every great business deserves a strong visual identity. 
 We help entrepreneurs, startups, and established brands 

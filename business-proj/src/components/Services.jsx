@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Link as ScrollLink } from "react-scroll";
+import { Link } from "react-router-dom";
 import * as Icons from "react-icons/md";
 import { services } from "../data/services";
 import { colors } from "../theme";
@@ -97,12 +97,7 @@ const Services = () => {
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ delay: 1, duration: 0.6 }}
         >
-          <ScrollLink
-            to="contact"
-            smooth={true}
-            duration={500}
-            onClick={() => window.history.replaceState(null, "", `${window.location.pathname}${window.location.search}#contact`)}
-          >
+          <Link to="/portfolio">
             <motion.button
               className="cta-button"
               whileHover={{ scale: 1.05 }}
@@ -110,7 +105,7 @@ const Services = () => {
             >
               {t("servicesCta")}
             </motion.button>
-          </ScrollLink>
+          </Link>
         </motion.div>
       </div>
     </section>

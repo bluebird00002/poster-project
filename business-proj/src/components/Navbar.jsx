@@ -26,7 +26,8 @@ const Navbar = () => {
       document.body.style.overflow = "";
     };
   }, [isOpen]);
-  const sectionIds = ["home", "about", "services", "portfolio", "contact"];
+  const scrollSectionIds = ["home", "about", "services", "contact"];
+  const sectionIds = ["home", "about", "services", "works", "contact"];
   const [activeSection, setActiveSection] = useState(() => {
     const hash = window.location.hash.slice(1);
     return sectionIds.includes(hash) ? hash : "home";
@@ -36,7 +37,8 @@ const Navbar = () => {
     { label: t("navHome"), to: "home" },
     { label: t("navAbout"), to: "about" },
     { label: t("navServices"), to: "services" },
-    { label: t("navProducts"), to: "portfolio" },
+    { label: t("navProducts"), to: "products", routeTo: "/portfolio" },
+    { label: t("navWorks"), to: "works", routeTo: "/works" },
     { label: t("navContact"), to: "contact" },
   ];
 
@@ -62,7 +64,13 @@ const Navbar = () => {
 
   // Sync URL hash when active section changes from scroll (after initial load)
   useEffect(() => {
-    if (scrollSyncReady.current && isHomePage && activeSection && window.location.hash !== `#${activeSection}`) {
+    if (
+      scrollSyncReady.current &&
+      isHomePage &&
+      activeSection &&
+      scrollSectionIds.includes(activeSection) &&
+      window.location.hash !== `#${activeSection}`
+    ) {
       updateHash(activeSection);
     }
   }, [isHomePage, activeSection]);
@@ -73,13 +81,19 @@ const Navbar = () => {
       setActiveSection(section);
     };
 
+    const normalizeSectionId = (id) => {
+      // The landing "portfolio" preview section now represents "works".
+      if (id === "portfolio") return "works";
+      return id;
+    };
+
     // Observer for sections
     const sections = ["home", "about", "services", "portfolio", "contact"];
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            handleSetActive(entry.target.id);
+            handleSetActive(normalizeSectionId(entry.target.id));
           }
         });
       },
@@ -127,7 +141,7 @@ const Navbar = () => {
         <div className="navbar-menu desktop-menu">
           {navItems.map((item, index) => (
             <motion.div key={item.to} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: index * 0.1 }}>
-              {isHomePage && item.to !== "portfolio" ? (
+              {isHomePage && scrollSectionIds.includes(item.to) ? (
                 <ScrollLink
                   to={item.to}
                   smooth={true}
@@ -140,17 +154,26 @@ const Navbar = () => {
                     <motion.div className="active-indicator" layoutId="activeIndicator" />
                   )}
                 </ScrollLink>
-              ) : item.to === "portfolio" ? (
-                <Link to="/portfolio" className={`nav-link ${!isHomePage ? "active" : ""}`}>
+              ) : item.routeTo ? (
+                <Link
+                  to={item.routeTo}
+                  className={`nav-link ${
+                    location.pathname === item.routeTo ||
+                    (isHomePage && item.to === "works" && activeSection === "works")
+                      ? "active"
+                      : ""
+                  }`}
+                >
                   {item.label}
-                  {!isHomePage && (
+                  {location.pathname === item.routeTo ||
+                  (isHomePage && item.to === "works" && activeSection === "works") ? (
                     <motion.div className="active-indicator" layoutId="activeIndicator" />
-                  )}
+                  ) : null}
                 </Link>
               ) : (
                 <Link
-                  to={item.to === "portfolio" ? "/portfolio" : `/#${item.to}`}
-                  className={`nav-link ${item.to === "portfolio" ? "active" : ""}`}
+                  to={`/#${item.to}`}
+                  className="nav-link"
                 >
                   {item.label}
                 </Link>
@@ -195,7 +218,7 @@ const Navbar = () => {
             transition={{ duration: 0.3 }}
           >
             {navItems.map((item) =>
-              isHomePage && item.to !== "portfolio" ? (
+              isHomePage && scrollSectionIds.includes(item.to) ? (
                 <ScrollLink
                   key={item.to}
                   to={item.to}
@@ -206,11 +229,16 @@ const Navbar = () => {
                 >
                   {item.label}
                 </ScrollLink>
-              ) : item.to === "portfolio" ? (
+              ) : item.routeTo ? (
                 <Link
                   key={item.to}
-                  to="/portfolio"
-                  className={`mobile-nav-link ${!isHomePage ? "active" : ""}`}
+                  to={item.routeTo}
+                  className={`mobile-nav-link ${
+                    location.pathname === item.routeTo ||
+                    (isHomePage && item.to === "works" && activeSection === "works")
+                      ? "active"
+                      : ""
+                  }`}
                   onClick={() => setIsOpen(false)}
                 >
                   {item.label}
@@ -218,8 +246,8 @@ const Navbar = () => {
               ) : (
                 <Link
                   key={item.to}
-                  to={item.to === "portfolio" ? "/portfolio" : `/#${item.to}`}
-                  className={`mobile-nav-link ${item.to === "portfolio" ? "active" : ""}`}
+                  to={`/#${item.to}`}
+                  className="mobile-nav-link"
                   onClick={() => setIsOpen(false)}
                 >
                   {item.label}
