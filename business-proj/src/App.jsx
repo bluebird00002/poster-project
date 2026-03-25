@@ -4,11 +4,13 @@ import HomePage from './components/HomePage';
 import PortfolioPage from './components/PortfolioPage';
 import OurWorksPage from './components/OurWorksPage';
 import { LanguageProvider } from './i18n/LanguageContext';
+import Watermark from './components/Watermark';
 
 function App() {
   return (
     <LanguageProvider>
-<Router className="page-watermark">
+      <Router className="page-watermark">
+        <Watermark />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />

@@ -49,8 +49,7 @@ const Hero = () => {
 
   return (
     <section id="home" className="hero">
-      {/* Subtle Logo Watermark */}
-      <div className="hero-logo-watermark" style={{ backgroundImage: `url(${logoImg})` }} aria-hidden="true" />
+      {/* Hero now uses the global site watermark from App.jsx; local hero watermark removed to avoid duplication. */}
       {/* Animated Background Orbs */}
       <motion.div
         className="orb orb-orange"

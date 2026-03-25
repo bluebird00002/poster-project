@@ -1,6 +1,6 @@
 .contact {
   width: 100%;
-  background: #0f1729;
+  background: #0b1119; /* slightly darker to reduce watermark visibility */
   padding: 100px 40px;
 }
 
@@ -26,11 +26,11 @@
   border-radius: 18px;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.06) 0%,
-    rgba(255, 255, 255, 0.03) 100%
+    rgba(0, 0, 0, 0.45) 0%,
+    rgba(0, 0, 0, 0.35) 100%
   );
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
 }
 
 .section-title {

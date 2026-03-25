@@ -1,0 +1,67 @@
+.site-watermark {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.site-watermark img {
+  width: 36vw;
+  max-width: 320px;
+  opacity: 0.12;
+  /* Keep the logo in full color and enhance visibility slightly */
+  filter: saturate(1.05) contrast(1.05) brightness(1);
+  user-select: none;
+  -webkit-user-drag: none;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .site-watermark img {
+    width: 56vw;
+    max-width: 240px;
+    opacity: 0.10;
+  }
+}
+
+/* Section overlay rules: add a subtle dark tint so the watermark shows through */
+.hero,
+.works-page,
+.portfolio-page {
+  position: relative;
+}
+
+.hero::before,
+.works-page::before,
+.portfolio-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.06);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Darker overlays for contact and footer to reduce watermark visibility */
+.contact::before,
+.footer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Ensure main content sits above the overlay so interactions remain intact */
+.hero .hero-container,
+.works-page .works-container,
+.portfolio-page .portfolio-container {
+  position: relative;
+  z-index: 2;
+}
