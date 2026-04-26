@@ -24,19 +24,33 @@
   box-sizing: border-box;
 }
 
+#root {
+  min-height: 100vh;
+  background-color: #0a0f1e;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
 body {
   font-family: var(--font-inter);
-  background: var(--color-background-primary);
+  background: 
+    radial-gradient(ellipse at 20% 30%, rgba(249, 115, 22, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(29, 111, 232, 0.05) 0%, transparent 50%),
+    linear-gradient(135deg, #0a0f1e 0%, #0f1729 50%, #0a0f1e 100%);
   color: var(--color-text-primary);
   line-height: 1.6;
   overflow-x: hidden;
   width: 100%;
   margin: 0;
   padding: 0;
+}
+
+@media (min-width: 769px) {
+  body {
+    background-attachment: fixed;
+  }
 }
 
 /* Scrollbar Styling - Desktop only */
@@ -61,10 +75,17 @@ body {
 
 /* Hide scrollbars on mobile everywhere */
 @media (max-width: 768px) {
-  html,
+  html {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    background-color: #0a0f1e !important;
+  }
+
   body {
     -ms-overflow-style: none;
     scrollbar-width: none;
+    background-color: #0a0f1e !important;
+    background: #0a0f1e !important;
   }
 
   html::-webkit-scrollbar,

@@ -1,6 +1,5 @@
 .contact {
   width: 100%;
-  background: #0b1119; /* slightly darker to reduce watermark visibility */
   padding: 100px 40px;
 }
 
@@ -113,9 +112,14 @@
 
 .social-link {
   color: #a0aec0;
-  font-size: 24px;
+  font-size: 16px;
+  font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
 }
 
 .social-link:hover {

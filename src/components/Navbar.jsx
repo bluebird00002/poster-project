@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
-import { HiMenu, HiX, HiTranslate } from "react-icons/hi";
+import { HiMenu, HiX, HiTranslate, HiHome, HiUser, HiColorSwatch, HiPhotograph, HiBriefcase, HiMail } from "react-icons/hi";
 import { colors } from "../theme";
 import { config } from "../config";
 import { useLanguage } from "../i18n/LanguageContext";
-import logoImg from "../assets/BussinessLogo.png";
+import menuBgImg from "../assets/ric raphix 3d.png";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -33,11 +33,18 @@ const Navbar = () => {
     return sectionIds.includes(hash) ? hash : "home";
   });
 
+  const navIcons = {
+    home: HiHome,
+    about: HiUser,
+    services: HiColorSwatch,
+    works: HiBriefcase,
+    contact: HiMail,
+  };
+
   const navItems = [
     { label: t("navHome"), to: "home" },
     { label: t("navAbout"), to: "about" },
     { label: t("navServices"), to: "services" },
-    { label: t("navProducts"), to: "products", routeTo: "/portfolio" },
     { label: t("navWorks"), to: "works", routeTo: "/works" },
     { label: t("navContact"), to: "contact" },
   ];
@@ -126,12 +133,10 @@ const Navbar = () => {
         >
           {isHomePage ? (
             <ScrollLink to="home" smooth={true} duration={500} className="navbar-logo-link" onClick={() => updateHash("home")}>
-              <img src={logoImg} alt={config.businessName} className="navbar-logo-img" />
               <span className="navbar-logo-text"><span style={{ color: colors.ricBlue }}>Ric</span><span style={{ color: colors.accentOrange }}>Raphix</span></span>
             </ScrollLink>
           ) : (
             <Link to="/" className="navbar-logo-link">
-              <img src={logoImg} alt={config.businessName} className="navbar-logo-img" />
               <span className="navbar-logo-text"><span style={{ color: colors.ricBlue }}>Ric</span><span style={{ color: colors.accentOrange }}>Raphix</span></span>
             </Link>
           )}
@@ -157,16 +162,15 @@ const Navbar = () => {
               ) : item.routeTo ? (
                 <Link
                   to={item.routeTo}
-                  className={`nav-link ${
-                    location.pathname === item.routeTo ||
-                    (isHomePage && item.to === "works" && activeSection === "works")
+                  className={`nav-link ${location.pathname === item.routeTo ||
+                      (isHomePage && item.to === "works" && activeSection === "works")
                       ? "active"
                       : ""
-                  }`}
+                    }`}
                 >
                   {item.label}
                   {location.pathname === item.routeTo ||
-                  (isHomePage && item.to === "works" && activeSection === "works") ? (
+                    (isHomePage && item.to === "works" && activeSection === "works") ? (
                     <motion.div className="active-indicator" layoutId="activeIndicator" />
                   ) : null}
                 </Link>
@@ -212,36 +216,46 @@ const Navbar = () => {
         {isOpen && (
           <motion.div
             className="mobile-menu"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
+            initial={{ opacity: 0, scaleY: 0, transformOrigin: "top" }}
+            animate={{ opacity: 1, scaleY: 1, transformOrigin: "top" }}
+            exit={{ opacity: 0, scaleY: 0, transformOrigin: "top" }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            style={{ backgroundImage: `url(${menuBgImg})` }}
           >
-            {navItems.map((item) =>
-              isHomePage && scrollSectionIds.includes(item.to) ? (
+            <div className="mobile-menu-overlay" />
+            {navItems.map((item) => {
+              const Icon = navIcons[item.to];
+              const isActive =
+                (isHomePage && scrollSectionIds.includes(item.to) && activeSection === item.to) ||
+                (item.routeTo && (location.pathname === item.routeTo ||
+                  (isHomePage && item.to === "works" && activeSection === "works")));
+
+              const linkContent = (
+                <span className="mobile-nav-link-inner">
+                  {Icon && <Icon className="mobile-nav-icon" size={20} />}
+                  <span>{item.label}</span>
+                </span>
+              );
+
+              return isHomePage && scrollSectionIds.includes(item.to) ? (
                 <ScrollLink
                   key={item.to}
                   to={item.to}
                   smooth={true}
                   duration={500}
-                  className={`mobile-nav-link ${activeSection === item.to ? "active" : ""}`}
+                  className={`mobile-nav-link ${isActive ? "active" : ""}`}
                   onClick={() => { updateHash(item.to); setIsOpen(false); }}
                 >
-                  {item.label}
+                  {linkContent}
                 </ScrollLink>
               ) : item.routeTo ? (
                 <Link
                   key={item.to}
                   to={item.routeTo}
-                  className={`mobile-nav-link ${
-                    location.pathname === item.routeTo ||
-                    (isHomePage && item.to === "works" && activeSection === "works")
-                      ? "active"
-                      : ""
-                  }`}
+                  className={`mobile-nav-link ${isActive ? "active" : ""}`}
                   onClick={() => setIsOpen(false)}
                 >
-                  {item.label}
+                  {linkContent}
                 </Link>
               ) : (
                 <Link
@@ -250,10 +264,10 @@ const Navbar = () => {
                   className="mobile-nav-link"
                   onClick={() => setIsOpen(false)}
                 >
-                  {item.label}
+                  {linkContent}
                 </Link>
-              )
-            )}
+              );
+            })}
           </motion.div>
         )}
       </AnimatePresence>

@@ -49,7 +49,7 @@ const Contact = () => {
 
             <div className="info-items">
               <motion.a
-                href={`tel:${config.phone}`}
+                href={`tel:${config.phone.split('/')[0].replace(/[^\d+]/g, '')}`}
                 className="info-item"
                 whileHover={{ x: 10 }}
               >
@@ -104,15 +104,6 @@ const Contact = () => {
             {/* Social Links */}
             <div className="social-links">
               <motion.a
-                href={config.social.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-link"
-                whileHover={{ y: -5, color: colors.accentBlue }}
-              >
-                <FaFacebook size={24} />
-              </motion.a>
-              <motion.a
                 href={config.social.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -120,15 +111,7 @@ const Contact = () => {
                 whileHover={{ y: -5, color: colors.accentBlue }}
               >
                 <FaInstagram size={24} />
-              </motion.a>
-              <motion.a
-                href={config.social.tiktok}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="social-link"
-                whileHover={{ y: -5, color: colors.accentBlue }}
-              >
-                <FaTiktok size={24} />
+                <span>@{config.social.instagramHandle}</span>
               </motion.a>
             </div>
           </motion.div>

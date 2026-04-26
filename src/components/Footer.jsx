@@ -25,8 +25,6 @@ const Footer = () => {
     { label: t("navHome"), to: "home", type: "scroll" },
     { label: t("navAbout"), to: "about", type: "scroll" },
     { label: t("navServices"), to: "services", type: "scroll" },
-    // Navigate to the products page, not the `#portfolio` preview section.
-    { label: t("navProducts"), to: "/portfolio", type: "route" },
     { label: t("navWorks"), to: "/works", type: "route" },
     { label: t("navContact"), to: "contact", type: "scroll" },
   ];
@@ -69,32 +67,7 @@ const Footer = () => {
             </h3>
           </Link>
           <p className="footer-tagline">{config.tagline}</p>
-          <div className="footer-socials">
-            <motion.a
-              href={config.social.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ y: -5, color: colors.accentBlue }}
-            >
-              <FaFacebook size={22} />
-            </motion.a>
-            <motion.a
-              href={config.social.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ y: -5, color: colors.accentBlue }}
-            >
-              <FaInstagram size={22} />
-            </motion.a>
-            <motion.a
-              href={config.social.tiktok}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ y: -5, color: colors.accentBlue }}
-            >
-              <FaTiktok size={22} />
-            </motion.a>
-          </div>
+
         </motion.div>
 
         {/* Center Column - Quick Links */}
@@ -132,7 +105,7 @@ const Footer = () => {
         <motion.div className="footer-column" variants={itemVariants}>
           <h4 className="footer-title">{t("footerContact")}</h4>
           <div className="footer-contact">
-            <a href={`tel:${config.phone}`} className="footer-contact-item">
+            <a href={`tel:${config.phone.split('/')[0].replace(/[^\d+]/g, '')}`} className="footer-contact-item">
               <HiPhone size={18} />
               <span>{config.phone}</span>
             </a>

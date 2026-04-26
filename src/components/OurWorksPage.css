@@ -1,141 +1,209 @@
 .works-page {
-  padding-top: 90px;
-  background: radial-gradient(ellipse at top, rgba(29, 111, 232, 0.22) 0%, rgba(15, 23, 41, 1) 55%, rgba(10, 15, 30, 1) 100%),
-    linear-gradient(135deg, #0f0f23 0%, #141a33 40%, #0f172a 100%);
+  padding-top: 120px;
+  padding-bottom: 100px;
+  background-color: #050a14;
   min-height: 100vh;
 }
 
 .works-container {
-  max-width: 1280px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 40px 60px;
+  padding: 0 40px;
 }
 
 .works-hero {
-  margin-top: 20px;
-  margin-bottom: 16px;
   text-align: center;
-}
-
-.category-bar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-  margin-bottom: 24px;
-}
-
-.category-btn {
-  padding: 10px 18px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.05);
-  color: rgba(226, 232, 240, 0.92);
-  cursor: pointer;
-  font-weight: 800;
-  font-size: 13px;
-  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-}
-
-.category-btn:hover {
-  transform: translateY(-2px);
-  border-color: rgba(29, 111, 232, 0.35);
-}
-
-.category-btn.active {
-  background: linear-gradient(135deg, rgba(29, 111, 232, 0.95), rgba(249, 115, 22, 0.55));
-  border-color: rgba(29, 111, 232, 0.75);
-  color: white;
-}
-
-.works-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 18px;
-}
-
-.work-card {
-  grid-column: span 4;
-  background: rgba(15, 23, 41, 0.72);
-  border: 1px solid rgba(249, 115, 22, 0.16);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
-}
-
-.work-media {
+  margin-bottom: 80px;
   position: relative;
-  height: 260px;
-  background: rgba(0, 0, 0, 0.08);
 }
 
-.work-media img {
+.works-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 950;
+  color: white;
+  margin-bottom: 20px;
+  letter-spacing: -2px;
+}
+
+.works-subtitle {
+  font-size: 1.2rem;
+  color: #94a3b8;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.title-accent {
+  width: 100px;
+  height: 5px;
+  background: linear-gradient(90deg, #f97316, transparent);
+  margin: 30px auto 0;
+  border-radius: 10px;
+}
+
+/* Stunning Staggered Layout */
+.works-staggered-layout {
+  columns: 3 350px;
+  column-gap: 30px;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
 }
 
-.work-media-gradient {
+.stagger-item {
+  break-inside: avoid;
+  margin-bottom: 30px;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #111827;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transform: translateZ(0);
+}
+
+.stagger-img-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.stagger-img-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stagger-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.0) 0%, rgba(0, 0, 0, 0.55) 100%);
+  background: linear-gradient(180deg, transparent 50%, rgba(5, 10, 20, 0.95) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 30px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
-.work-body {
-  padding: 14px 14px 18px;
-}
-
-.work-title {
-  font-weight: 800;
-  font-size: 15px;
-  color: #f8fafc;
-  margin-bottom: 12px;
-}
-
-.work-order-btn {
-  width: 100%;
-  padding: 12px 14px;
-  border-radius: 12px;
-  border: 1px solid rgba(249, 115, 22, 0.55);
-  background: linear-gradient(135deg, rgba(249, 115, 22, 1) 0%, rgba(234, 88, 12, 1) 100%);
+.stagger-label {
   color: white;
-  font-weight: 800;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transform: translateY(10px);
+  transition: transform 0.4s ease;
+}
+
+.stagger-line {
+  width: 0;
+  height: 2px;
+  background: #f97316;
+  margin-bottom: 10px;
+  transition: width 0.6s ease;
+}
+
+.stagger-item:hover img {
+  transform: scale(1.1);
+}
+
+.stagger-item:hover .stagger-overlay {
+  opacity: 1;
+}
+
+.stagger-item:hover .stagger-label {
+  transform: translateY(0);
+}
+
+.stagger-item:hover .stagger-line {
+  width: 40px;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.pagination-numbers {
+  display: flex;
+  gap: 10px;
+}
+
+.pagination-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.3s ease;
 }
 
-.work-order-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 10px 30px rgba(249, 115, 22, 0.25);
+.pagination-btn:hover:not(:disabled) {
+  border-color: #f97316;
+  color: #f97316;
+  background: rgba(249, 115, 22, 0.1);
 }
 
-.work-order-btn:focus-visible {
-  outline: 2px solid rgba(29, 111, 232, 0.9);
-  outline-offset: 2px;
+.pagination-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 
-@media (max-width: 1024px) {
-  .work-card {
-    grid-column: span 6;
+.pagination-num {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: #94a3b8;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pagination-num:hover:not(.active) {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.pagination-num.active {
+  background: #f97316;
+  border-color: #f97316;
+  color: white;
+  box-shadow: 0 10px 20px rgba(249, 115, 22, 0.2);
+}
+
+@media (max-width: 992px) {
+  .works-staggered-layout {
+    columns: 2 300px;
   }
 }
 
-@media (max-width: 768px) {
-  .works-container {
-    padding: 0 20px 50px;
+@media (max-width: 600px) {
+  .works-staggered-layout {
+    columns: 1;
   }
-
-  .works-grid {
-    gap: 14px;
+  
+  .pagination {
+    gap: 10px;
   }
-
-  .work-card {
-    grid-column: span 12;
-  }
-
-  .work-media {
-    height: 170px;
+  
+  .pagination-btn, .pagination-num {
+    width: 38px;
+    height: 38px;
+    font-size: 14px;
   }
 }
 

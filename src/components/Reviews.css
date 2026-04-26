@@ -1,6 +1,5 @@
 .reviews {
   width: 100%;
-  background: radial-gradient(ellipse at top, #0a0f1e 0%, #0f1729 70%, #1a1a2e 100%);
   padding: 120px 40px;
   position: relative;
   overflow-x: hidden;
@@ -141,9 +140,6 @@
   73%, 76% { transform: translateX(-2472px); }
   95%, 100% { transform: translateX(-3296px); }
 }
-
-<xai:function_call name="edit_file">
-<parameter name="path">business-proj/src/components/Reviews.css
 
 .review-header {
   display: flex;

@@ -31,6 +31,7 @@
   align-items: center;
   cursor: pointer;
   flex-shrink: 0;
+  flex: 1;
 }
 
 .navbar-logo-link {
@@ -67,14 +68,15 @@
 .navbar-menu {
   display: flex;
   gap: 40px;
-  flex: 1;
-  margin-left: 60px;
+  justify-content: center;
 }
 
 .navbar-controls {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex: 1;
+  justify-content: flex-end;
 }
 
 .language-toggle {
@@ -210,33 +212,76 @@
 
 .mobile-menu {
   display: none;
-  position: absolute;
+  position: fixed;
   top: 70px;
+  left: 0;
   right: 0;
-  width: 100%;
+  width: 100vw;
   background: #0f1729;
+  background-size: 30%;
+  background-position: center center;
+  background-repeat: no-repeat;
   flex-direction: column;
   align-items: center;
   gap: 20px;
   padding: 30px 0;
   border-bottom: 1px solid #1e2a45;
+  overflow: hidden;
+  z-index: 998;
+  transform-origin: top center;
+}
+
+.mobile-menu-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 10, 20, 0.90);
+  z-index: 0;
+  pointer-events: none;
 }
 
 .mobile-nav-link {
-  color: #a0aec0;
+  color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
-  font-weight: 500;
-  font-size: 16px;
+  font-weight: 600;
+  font-size: 17px;
   cursor: pointer;
-  padding: 10px 30px;
+  padding: 12px 24px;
   width: 100%;
   text-align: center;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
+  position: relative;
+  z-index: 1;
+  border-radius: 0;
 }
 
-.mobile-nav-link:hover,
+.mobile-nav-link-inner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.mobile-nav-icon {
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.mobile-nav-link:hover {
+  color: white;
+  background: rgba(249, 115, 22, 0.1);
+}
+
 .mobile-nav-link.active {
   color: #f97316;
+  background: rgba(249, 115, 22, 0.15);
+  border-left: 3px solid #f97316;
+  border-right: 3px solid #f97316;
+  font-weight: 700;
+}
+
+.mobile-nav-link.active .mobile-nav-icon {
+  color: #f97316;
+  opacity: 1;
 }
 
 .mobile-auth {
@@ -332,11 +377,17 @@
     display: none;
   }
 
-  .navbar-logo-img {
-    height: 36px;
-  }
-
   .navbar-logo-text {
     font-size: 18px;
+  }
+
+  .navbar-logo {
+    flex: initial;
+    margin-right: 0;
+  }
+
+  .navbar-controls {
+    flex: initial;
+    justify-content: flex-end;
   }
 }
