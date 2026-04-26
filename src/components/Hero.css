@@ -38,15 +38,14 @@
   position: relative;
   z-index: 10;
   width: 100%;
-  max-width: 90vw;
+  max-width: 1700px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 60px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
-  gap: 40px;
-  border:none;
+  justify-content: center;
+  gap: 90px;
 }
 
 .hero-content {
@@ -68,28 +67,39 @@
   .hero-container {
     flex-direction: column;
     justify-content: center;
-    gap: 70px;
-    padding: 0 30px;
+    gap: 40px;
+    padding: 20px 30px;
   }
 
   .hero-image-container {
     display: flex;
-    max-width: 300px;
+    max-width: 100px;
     margin: 0 auto;
+  }
+
+  .hero-image-left {
+    transform: scale(0.6);
   }
 
   .hero-content {
     width: 100% !important;
     max-width: 100% !important;
-    flex: 1;
+    flex: none;
+    text-align: center;
+    align-items: center;
+  }
+
+  .hero-title-line1 {
+    text-align: center !important;
+    margin-left: 0 !important;
   }
 
   .hero-buttons {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: center !important;
     align-items: center;
-    margin: 0;
+    margin: 0 auto;
   }
 }
 
@@ -99,13 +109,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 400px;
+  max-width: 700px;
+  transform: scale(1.15);
+  transition: transform 0.5s ease;
+}
+
+@media (min-width: 1800px) {
+  .hero-image-container {
+    max-width: 1000px;
+    transform: scale(2.0);
+  }
 }
 
 .hero-image-wrapper {
   position: relative;
   width: 100%;
-  max-width: 400px;
+  max-width: 100%;
   perspective: 1000px;
 }
 
@@ -131,12 +150,12 @@
 }
 
 .hero-title {
-  font-size: 3.5rem;
+  font-size: clamp(3.2rem, 5.5vw, 6rem);
   font-weight: 900;
   color: white;
-  margin: 0 0 20px 0;
-  line-height: 1.25;
-  letter-spacing: -1px;
+  margin: 0 0 28px 0;
+  line-height: 1.08;
+  letter-spacing: -1.8px;
   text-align: center;
   width: 100%;
 }
@@ -161,10 +180,10 @@
 }
 
 .hero-subtitle {
-  font-size: 1.15rem;
+  font-size: clamp(1.1rem, 1.5vw, 1.3rem);
   color: #cbd5e1;
-  margin: 0 0 35px 0;
-  max-width: 500px;
+  margin: 0 0 40px 0;
+  max-width: 600px;
   line-height: 1.6;
   font-weight: 400;
   text-align: center;
