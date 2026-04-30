@@ -6,7 +6,7 @@ export const portfolio = [
   {
     id: 1,
     image: placeholderImg,
-    category: "Banners",
+    category: "Corporate Branding",
     title: "Event Promotion Banner",
     basePrice: 65000,
     turnaroundLabel: "3-5 days",
@@ -17,7 +17,7 @@ export const portfolio = [
   {
     id: 2,
     image: placeholderImg,
-    category: "Banners",
+    category: "Corporate Branding",
     title: "Business Banner Design",
     basePrice: 72000,
     turnaroundLabel: "4-6 days",
@@ -28,7 +28,7 @@ export const portfolio = [
   {
     id: 3,
     image: placeholderImg,
-    category: "T-Shirts",
+    category: "Corporate Branding",
     title: "Custom T-Shirt Design",
     basePrice: 28000,
     turnaroundLabel: "5-7 days",
@@ -39,7 +39,7 @@ export const portfolio = [
   {
     id: 4,
     image: placeholderImg,
-    category: "T-Shirts",
+    category: "Corporate Branding",
     title: "Corporate T-Shirt Print",
     basePrice: 32000,
     turnaroundLabel: "4-6 days",
@@ -50,7 +50,7 @@ export const portfolio = [
   {
     id: 5,
     image: placeholderImg,
-    category: "Logos",
+    category: "Corporate Branding",
     title: "Modern Logo Design 1",
     basePrice: 85000,
     turnaroundLabel: "2-3 days",
@@ -61,7 +61,7 @@ export const portfolio = [
   {
     id: 6,
     image: placeholderImg,
-    category: "Logos",
+    category: "Corporate Branding",
     title: "Premium Logo Design",
     basePrice: 95000,
     turnaroundLabel: "3-4 days",
@@ -72,7 +72,7 @@ export const portfolio = [
   {
     id: 7,
     image: placeholderImg,
-    category: "Flyers",
+    category: "Corporate Branding",
     title: "Promotion Flyer Design",
     basePrice: 15000,
     turnaroundLabel: "2-4 days",
@@ -83,7 +83,7 @@ export const portfolio = [
   {
     id: 8,
     image: placeholderImg,
-    category: "Flyers",
+    category: "Corporate Branding",
     title: "Event Flyer Print",
     basePrice: 18000,
     turnaroundLabel: "3-5 days",
@@ -94,7 +94,7 @@ export const portfolio = [
   {
     id: 9,
     image: placeholderImg,
-    category: "Stickers",
+    category: "Corporate Branding",
     title: "Custom Sticker Pack",
     basePrice: 12000,
     turnaroundLabel: "2-3 days",
@@ -105,7 +105,7 @@ export const portfolio = [
   {
     id: 10,
     image: placeholderImg,
-    category: "Banners",
+    category: "Corporate Branding",
     title: "Festival Banner Large",
     basePrice: 88000,
     turnaroundLabel: "4-7 days",
@@ -116,7 +116,7 @@ export const portfolio = [
   {
     id: 11,
     image: placeholderImg,
-    category: "Banners",
+    category: "Corporate Branding",
     title: "Store Opening Banner",
     basePrice: 74000,
     turnaroundLabel: "3-6 days",
@@ -127,7 +127,7 @@ export const portfolio = [
   {
     id: 12,
     image: placeholderImg,
-    category: "T-Shirts",
+    category: "Corporate Branding",
     title: "Team Uniform T-Shirts",
     basePrice: 35000,
     turnaroundLabel: "5-8 days",
@@ -138,7 +138,7 @@ export const portfolio = [
   {
     id: 13,
     image: placeholderImg,
-    category: "T-Shirts",
+    category: "Corporate Branding",
     title: "Custom Event T-Shirts",
     basePrice: 38000,
     turnaroundLabel: "4-7 days",
@@ -149,7 +149,7 @@ export const portfolio = [
   {
     id: 14,
     image: placeholderImg,
-    category: "Logos",
+    category: "Corporate Branding",
     title: "Brand Identity Logo",
     basePrice: 90000,
     turnaroundLabel: "2-4 days",
@@ -160,7 +160,7 @@ export const portfolio = [
   {
     id: 15,
     image: placeholderImg,
-    category: "Logos",
+    category: "Corporate Branding",
     title: "Startup Logo Concept",
     basePrice: 75000,
     turnaroundLabel: "2-3 days",
@@ -171,7 +171,7 @@ export const portfolio = [
   {
     id: 16,
     image: placeholderImg,
-    category: "Flyers",
+    category: "Corporate Branding",
     title: "Product Launch Flyer",
     basePrice: 22000,
     turnaroundLabel: "3-4 days",
@@ -182,7 +182,7 @@ export const portfolio = [
   {
     id: 17,
     image: placeholderImg,
-    category: "Flyers",
+    category: "Corporate Branding",
     title: "Wedding Invitation Flyer",
     basePrice: 25000,
     turnaroundLabel: "3-6 days",
@@ -193,7 +193,7 @@ export const portfolio = [
   {
     id: 18,
     image: placeholderImg,
-    category: "Stickers",
+    category: "Corporate Branding",
     title: "Product Label Stickers",
     basePrice: 14000,
     turnaroundLabel: "2-4 days",
@@ -204,7 +204,7 @@ export const portfolio = [
   {
     id: 19,
     image: placeholderImg,
-    category: "Banners",
+    category: "Corporate Branding",
     title: "Conference Banner",
     basePrice: 78000,
     turnaroundLabel: "4-6 days",
@@ -215,7 +215,7 @@ export const portfolio = [
   {
     id: 20,
     image: placeholderImg,
-    category: "T-Shirts",
+    category: "Corporate Branding",
     title: "Merchandise T-Shirts",
     basePrice: 42000,
     turnaroundLabel: "5-8 days",
@@ -225,4 +225,4 @@ export const portfolio = [
   },
 ];
 
-export const portfolioCategories = ["All", "Banners", "T-Shirts", "Logos", "Flyers", "Stickers"];
+export const portfolioCategories = ["All", "Corporate Branding"];

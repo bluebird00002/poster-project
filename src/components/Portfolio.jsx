@@ -1,17 +1,40 @@
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../i18n/LanguageContext";
 import "./Portfolio.css";
 
-// Dynamic import for all portfolio images
+// Dynamic import for all portfolio images (excluding videos)
 const imageModules = import.meta.glob("../assets/portifolio/*.{png,jpg,jpeg,svg}", { eager: true });
 const allPortfolioImages = Object.values(imageModules).map((mod) => mod.default);
 
+// Import videos separately
+import eafVideo from "../assets/portifolio/EAFmp4.mp4";
+import shakinaVideo from "../assets/portifolio/shakina.mp4";
+
 const Portfolio = () => {
   const { t } = useLanguage();
-  // Display only first 4 for the homepage section
-  const displayImages = allPortfolioImages.slice(0, 4);
+  const eafRef = useRef(null);
+  const shakinaRef = useRef(null);
+
+  // Create diagonal layout: video 1, image 2, image 3, video 4
+  // Ensure images exist before adding them
+  const displayItems = [
+    { type: "video", src: eafVideo, ref: eafRef, title: "Corporate Branding" },
+  ];
+
+  // Add image 1 if it exists
+  if (allPortfolioImages.length > 0 && allPortfolioImages[0]) {
+    displayItems.push({ type: "image", src: allPortfolioImages[0], title: "Corporate Branding" });
+  }
+
+  // Add image 2 if it exists
+  if (allPortfolioImages.length > 1 && allPortfolioImages[1]) {
+    displayItems.push({ type: "image", src: allPortfolioImages[1], title: "Corporate Branding" });
+  }
+
+  // Add video 4
+  displayItems.push({ type: "video", src: shakinaVideo, ref: shakinaRef, title: "Corporate Branding" });
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -61,34 +84,41 @@ const Portfolio = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
-          {displayImages.map((img, index) => {
-            // Categorize images based on their filename/index
-            const getCategory = (path) => {
-              const filename = path.split('/').pop();
-              const num = parseInt(filename.match(/\d+/)?.[0] || "0");
-              
-              if ([3, 21, 23, 24, 25, 29, 30, 35, 40].includes(num)) return t("catBusinessCard");
-              if ([1, 2, 4, 13, 14, 15, 16, 17, 19, 22, 28, 33, 34, 36, 37, 38, 39].includes(num)) return t("catFlyer");
-              if ([10, 12, 18, 32].includes(num)) return t("catBanner");
-              if ([20, 8, 20].includes(num)) return t("catOutdoor");
-              if ([5, 31].includes(num)) return t("catStationary");
-              if ([9, 26, 27].includes(num)) return t("catSignage");
-              if ([11].includes(num)) return t("catLogo");
-              return t("catBranding");
-            };
-
-            const category = getCategory(img);
+          {displayItems.filter(item => item.src).map((item, index) => {
+            const isVideo = item.type === "video";
 
             return (
               <motion.div
                 key={index}
-                className="portfolio-card"
+                className={`portfolio-card ${isVideo ? 'portfolio-card-video' : ''}`}
                 variants={itemVariants}
+                onMouseEnter={() => {
+                  if (isVideo && item.ref.current) {
+                    item.ref.current.pause();
+                  }
+                }}
+                onMouseLeave={() => {
+                  if (isVideo && item.ref.current) {
+                    item.ref.current.play();
+                  }
+                }}
               >
                 <div className="portfolio-card-img">
-                  <img src={img} alt={`${category} ${index + 1}`} loading="lazy" />
+                  {isVideo ? (
+                    <video
+                      ref={item.ref}
+                      src={item.src}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="portfolio-video"
+                    />
+                  ) : (
+                    <img src={item.src} alt={`${item.title}`} loading="lazy" />
+                  )}
                   <div className="portfolio-card-overlay">
-                    <span className="portfolio-category-label">{category}</span>
+                    <span className="portfolio-category-label">{item.title}</span>
                   </div>
                 </div>
               </motion.div>

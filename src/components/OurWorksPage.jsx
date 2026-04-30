@@ -7,17 +7,36 @@ import { useLanguage } from "../i18n/LanguageContext";
 import { HiArrowLeft, HiArrowRight } from "react-icons/hi";
 import "./OurWorksPage.css";
 
+// Import placeholder for broken images
+import placeholderImg from "../assets/placeholder-image.jpg";
+
 // Dynamic import for all portfolio images
 const imageModules = import.meta.glob("../assets/portifolio/*.{png,jpg,jpeg,svg}", { eager: true });
-const rawImages = Object.values(imageModules).map((mod) => mod.default);
+const rawImages = Object.values(imageModules)
+  .map((mod) => mod.default)
+  .filter((path) => path && typeof path === 'string');
 
-// Swap Project 17 (index 16) with the last image (index 17)
-const allPortfolioImages = [...rawImages];
-if (allPortfolioImages.length >= 18) {
-  const temp = allPortfolioImages[16];
-  allPortfolioImages[16] = allPortfolioImages[allPortfolioImages.length - 1];
-  allPortfolioImages[allPortfolioImages.length - 1] = temp;
-}
+// Dynamic import for all portfolio videos except EAF and shakina
+const videoModules = import.meta.glob("../assets/portifolio/*.{mp4,webm}", { eager: true });
+const allVideos = Object.values(videoModules)
+  .map((mod) => mod.default)
+  .filter((path) => path && typeof path === 'string' && !path.includes("EAFmp4") && !path.includes("shakina"));
+
+// Combine images and videos for Our Works page (excluding EAF and shakina)
+let allPortfolioItems = [...allVideos, ...rawImages];
+
+// Shuffle function to mix videos and images
+const shuffleArray = (array) => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
+// Shuffle the combined array
+const allPortfolioImages = shuffleArray(allPortfolioItems);
 
 const ITEMS_PER_PAGE = 9;
 
@@ -65,25 +84,14 @@ const OurWorksPage = () => {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
             >
-              {currentImages.map((img, index) => {
+              {currentImages.filter(item => item && typeof item === 'string').map((item, index) => {
                 const globalIndex = (currentPage - 1) * ITEMS_PER_PAGE + index;
-                
-                // Categorize images based on their filename/index
-                const getCategory = (path) => {
-                  const filename = path.split('/').pop();
-                  const num = parseInt(filename.match(/\d+/)?.[0] || "0");
-                  
-                  if ([3, 21, 23, 24, 25, 29, 30, 35, 40].includes(num)) return t("catBusinessCard");
-                  if ([1, 2, 4, 13, 14, 15, 16, 17, 19, 22, 28, 33, 34, 36, 37, 38, 39].includes(num)) return t("catFlyer");
-                  if ([10, 12, 18, 32].includes(num)) return t("catBanner");
-                  if ([20, 8].includes(num)) return t("catOutdoor");
-                  if ([5, 31].includes(num)) return t("catStationary");
-                  if ([9, 26, 27].includes(num)) return t("catSignage");
-                  if ([11].includes(num)) return t("catLogo");
-                  return t("catBranding");
-                };
 
-                const category = getCategory(img);
+                // All items are categorized as Corporate Branding
+                const category = t("catBranding");
+
+                // Check if item is a video
+                const isVideo = typeof item === 'string' && item.match(/\.(mp4|webm)$/i);
 
                 // Create different animation sets
                 const animations = [
@@ -97,18 +105,37 @@ const OurWorksPage = () => {
                 return (
                   <motion.div
                     key={globalIndex}
-                    className="stagger-item"
+                    className={`stagger-item ${isVideo ? 'stagger-item-video' : ''}`}
                     initial={anim.hidden}
                     whileInView={anim.visible}
                     viewport={{ once: true, margin: "-50px" }}
-                    transition={{ 
-                      duration: 0.8, 
+                    transition={{
+                      duration: 0.8,
                       delay: (index % 3) * 0.15,
-                      ease: [0.16, 1, 0.3, 1] 
+                      ease: [0.16, 1, 0.3, 1]
                     }}
                   >
                     <div className="stagger-img-wrapper">
-                      <img src={img} alt={`${category} ${globalIndex + 1}`} loading="lazy" />
+                      {isVideo ? (
+                        <video
+                          src={item}
+                          autoPlay
+                          muted
+                          loop
+                          playsInline
+                          className="stagger-video"
+                        />
+                      ) : (
+                        <img
+                          src={item}
+                          alt={`${category}`}
+                          loading="lazy"
+                          onError={(e) => {
+                            e.target.src = placeholderImg;
+                            e.target.onerror = null;
+                          }}
+                        />
+                      )}
                       <div className="stagger-overlay">
                         <div className="stagger-line" />
                         <span className="stagger-label">{category}</span>
