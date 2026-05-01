@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../i18n/LanguageContext";
@@ -14,13 +14,11 @@ import shakinaVideo from "../assets/portifolio/shakina.mp4";
 
 const Portfolio = () => {
   const { t } = useLanguage();
-  const eafRef = useRef(null);
-  const shakinaRef = useRef(null);
 
   // Create diagonal layout: video 1, image 2, image 3, video 4
   // Ensure images exist before adding them
   const displayItems = [
-    { type: "video", src: eafVideo, ref: eafRef, title: "Corporate Branding" },
+    { type: "video", src: eafVideo, title: "Corporate Branding" },
   ];
 
   // Add image 1 if it exists
@@ -34,7 +32,7 @@ const Portfolio = () => {
   }
 
   // Add video 4
-  displayItems.push({ type: "video", src: shakinaVideo, ref: shakinaRef, title: "Corporate Branding" });
+  displayItems.push({ type: "video", src: shakinaVideo, title: "Corporate Branding" });
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -92,21 +90,10 @@ const Portfolio = () => {
                 key={index}
                 className={`portfolio-card ${isVideo ? 'portfolio-card-video' : ''}`}
                 variants={itemVariants}
-                onMouseEnter={() => {
-                  if (isVideo && item.ref.current) {
-                    item.ref.current.pause();
-                  }
-                }}
-                onMouseLeave={() => {
-                  if (isVideo && item.ref.current) {
-                    item.ref.current.play();
-                  }
-                }}
               >
                 <div className="portfolio-card-img">
                   {isVideo ? (
                     <video
-                      ref={item.ref}
                       src={item.src}
                       autoPlay
                       muted
