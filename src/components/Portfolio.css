@@ -117,6 +117,14 @@
   height: auto;
 }
 
+/* Full display for legalbase and citylights images */
+.portfolio-card-img img[src*="legalbase"],
+.portfolio-card-img img[src*="city solar lights"] {
+  object-fit: contain;
+  width: 100%;
+  height: auto;
+}
+
 .portfolio-card-overlay {
   position: absolute;
   inset: 0;

@@ -92,6 +92,14 @@
   height: auto;
 }
 
+/* Full display for legalbase and citylights images */
+.stagger-img-wrapper img[src*="legalbase"],
+.stagger-img-wrapper img[src*="city solar lights"] {
+  object-fit: contain;
+  width: 100%;
+  height: auto;
+}
+
 .stagger-overlay {
   position: absolute;
   inset: 0;

@@ -21,14 +21,22 @@ const Portfolio = () => {
     { type: "video", src: eafVideo, title: "Indoor wall sign" },
   ];
 
+  // Helper function to get image title based on filename
+  const getImageTitle = (path) => {
+    if (path && path.toLowerCase().includes('dynace')) {
+      return 'Cap & Tshirts embroidery';
+    }
+    return 'Corporate Branding';
+  };
+
   // Add image 1 if it exists
   if (allPortfolioImages.length > 0 && allPortfolioImages[0]) {
-    displayItems.push({ type: "image", src: allPortfolioImages[0], title: "Corporate Branding" });
+    displayItems.push({ type: "image", src: allPortfolioImages[0], title: getImageTitle(allPortfolioImages[0]) });
   }
 
   // Add image 2 if it exists
   if (allPortfolioImages.length > 1 && allPortfolioImages[1]) {
-    displayItems.push({ type: "image", src: allPortfolioImages[1], title: "Corporate Branding" });
+    displayItems.push({ type: "image", src: allPortfolioImages[1], title: getImageTitle(allPortfolioImages[1]) });
   }
 
   // Add video 4
