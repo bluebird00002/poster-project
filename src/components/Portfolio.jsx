@@ -18,7 +18,7 @@ const Portfolio = () => {
   // Create diagonal layout: video 1, image 2, image 3, video 4
   // Ensure images exist before adding them
   const displayItems = [
-    { type: "video", src: eafVideo, title: "Corporate Branding" },
+    { type: "video", src: eafVideo, title: "Indoor wall sign" },
   ];
 
   // Add image 1 if it exists
@@ -32,7 +32,7 @@ const Portfolio = () => {
   }
 
   // Add video 4
-  displayItems.push({ type: "video", src: shakinaVideo, title: "Corporate Branding" });
+  displayItems.push({ type: "video", src: shakinaVideo, title: "Indoor wall sign" });
 
   const containerVariants = {
     hidden: { opacity: 0 },

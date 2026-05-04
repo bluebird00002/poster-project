@@ -87,8 +87,22 @@ const OurWorksPage = () => {
               {currentImages.filter(item => item && typeof item === 'string').map((item, index) => {
                 const globalIndex = (currentPage - 1) * ITEMS_PER_PAGE + index;
 
-                // All items are categorized as Corporate Branding
-                const category = t("catBranding");
+                // Determine category based on filename
+                const getCategory = (path) => {
+                  const lowerPath = path.toLowerCase();
+                  if (lowerPath.includes('dynace')) {
+                    return 'Cap & Tshirts embroidery';
+                  }
+                  if (lowerPath.includes('aqm36ks86p86hqs2u') || lowerPath.includes('secure')) {
+                    return 'Indoor wall sign';
+                  }
+                  if (lowerPath.includes('aqnmvtyypk2k69iem1cvmhkx456jo4kpmdyajlt0aypvvvnwz')) {
+                    return 'Min Promotional booth';
+                  }
+                  return t("catBranding");
+                };
+
+                const category = getCategory(item);
 
                 // Check if item is a video
                 const isVideo = typeof item === 'string' && item.match(/\.(mp4|webm)$/i);
