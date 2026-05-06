@@ -96,7 +96,25 @@ const OurWorksPage = () => {
                   if (lowerPath.includes('aqm36ks86p86hqs2u') || lowerPath.includes('secure')) {
                     return 'Indoor wall sign';
                   }
-                  if (lowerPath.includes('aqnmvtyypk2k69iem1cvmhkx456jo4kpmdyajlt0aypvvvnwz')) {
+                  if (lowerPath.includes('legalbase') || lowerPath.includes('city solar lights') || lowerPath.includes('shikanimg') || lowerPath.includes('mspot')) {
+                    return '3D luminous sign';
+                  }
+                  if (lowerPath.includes('bottles') || lowerPath.includes('eafoods')) {
+                    return 'Bottle branding';
+                  }
+                  if (lowerPath.includes('business') || lowerPath.includes('cards')) {
+                    return 'Business cards';
+                  }
+                  if (lowerPath.includes('notebook')) {
+                    return 'Notebooks';
+                  }
+                  if (lowerPath.includes('umbrellabrand')) {
+                    return 'Umbrella';
+                  }
+                  if (lowerPath.includes('eafbag')) {
+                    return 'Bags';
+                  }
+                  if (lowerPath.includes('aqnmvty') || lowerPath.includes('minpromo') || lowerPath.includes('promotional')) {
                     return 'Min Promotional booth';
                   }
                   return t("catBranding");

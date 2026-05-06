@@ -26,6 +26,24 @@ const Portfolio = () => {
     if (path && path.toLowerCase().includes('dynace')) {
       return 'Cap & Tshirts embroidery';
     }
+    if (path && path.toLowerCase().includes('legalbase') || path && path.toLowerCase().includes('city solar lights') || path && path.toLowerCase().includes('shikanimg') || path && path.toLowerCase().includes('mspot')) {
+      return '3D luminous sign';
+    }
+    if (path && path.toLowerCase().includes('bottles') || path && path.toLowerCase().includes('eafoods')) {
+      return 'Bottle branding';
+    }
+    if (path && path.toLowerCase().includes('business') || path && path.toLowerCase().includes('cards')) {
+      return 'Business cards';
+    }
+    if (path && path.toLowerCase().includes('notebook')) {
+      return 'Notebooks';
+    }
+    if (path && path.toLowerCase().includes('umbrellabrand')) {
+      return 'Umbrella';
+    }
+    if (path && path.toLowerCase().includes('eafbag')) {
+      return 'Bags';
+    }
     return 'Corporate Branding';
   };
 
