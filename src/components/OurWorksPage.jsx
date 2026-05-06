@@ -135,6 +135,9 @@ const OurWorksPage = () => {
                   if (lowerPath.includes('aqnmvty') || lowerPath.includes('minpromo') || lowerPath.includes('promotional')) {
                     return 'Min Promotional booth';
                   }
+                  if (lowerPath.includes('banner')) {
+                    return 'Roll up Banner';
+                  }
                   return t("catBranding");
                 };
 

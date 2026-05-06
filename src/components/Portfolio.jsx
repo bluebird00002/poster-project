@@ -59,6 +59,9 @@ const Portfolio = () => {
     if (path && path.toLowerCase().includes('onja') || path && path.toLowerCase().includes('wakala')) {
       return 'Promotional Materials';
     }
+    if (path && path.toLowerCase().includes('banner')) {
+      return 'Roll up Banner';
+    }
     return 'Corporate Branding';
   };
 
