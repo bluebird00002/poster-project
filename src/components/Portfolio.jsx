@@ -26,7 +26,7 @@ const Portfolio = () => {
     if (path && path.toLowerCase().includes('dynace')) {
       return 'Cap & Tshirts embroidery';
     }
-    if (path && path.toLowerCase().includes('legalbase') || path && path.toLowerCase().includes('city solar lights') || path && path.toLowerCase().includes('shikanimg') || path && path.toLowerCase().includes('mspot')) {
+    if (path && path.toLowerCase().includes('legalbase') || path && path.toLowerCase().includes('city solar lights') || path && path.toLowerCase().includes('citylights') || path && path.toLowerCase().includes('shikanimg') || path && path.toLowerCase().includes('mspot') || path && path.toLowerCase().includes('elegance')) {
       return '3D luminous sign';
     }
     if (path && path.toLowerCase().includes('bottles') || path && path.toLowerCase().includes('eafoods')) {
@@ -43,6 +43,21 @@ const Portfolio = () => {
     }
     if (path && path.toLowerCase().includes('eafbag')) {
       return 'Bags';
+    }
+    if (path && path.toLowerCase().includes('goldenbanana') || path && path.toLowerCase().includes('potatoking')) {
+      return 'Food Branding';
+    }
+    if (path && path.toLowerCase().includes('handbag')) {
+      return 'Promotional Bags';
+    }
+    if (path && path.toLowerCase().includes('eafstaff')) {
+      return 'Staff Uniforms';
+    }
+    if (path && path.toLowerCase().includes('badges')) {
+      return 'Corporate Badges';
+    }
+    if (path && path.toLowerCase().includes('onja') || path && path.toLowerCase().includes('wakala')) {
+      return 'Promotional Materials';
     }
     return 'Corporate Branding';
   };
