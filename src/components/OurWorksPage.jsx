@@ -118,7 +118,7 @@ const OurWorksPage = () => {
                     return 'Bags';
                   }
                   if (lowerPath.includes('goldenbanana') || lowerPath.includes('potatoking')) {
-                    return 'Food Branding';
+                    return 'Gondola';
                   }
                   if (lowerPath.includes('handbag')) {
                     return 'Promotional Bags';

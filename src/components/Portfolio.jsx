@@ -48,7 +48,7 @@ const Portfolio = () => {
       return 'Bags';
     }
     if (path && path.toLowerCase().includes('goldenbanana') || path && path.toLowerCase().includes('potatoking')) {
-      return 'Food Branding';
+      return 'Gondola';
     }
     if (path && path.toLowerCase().includes('handbag')) {
       return 'Promotional Bags';
