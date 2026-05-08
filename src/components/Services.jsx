@@ -5,51 +5,10 @@ import { Link } from "react-router-dom";
 import {
   MdDesignServices,
   MdPrint,
-  MdBrandingWatermark,
-  MdBusiness,
-  MdPhotoFilter,
-  MdLocalPrintshop,
 } from "react-icons/md";
 import { FaCheckCircle } from "react-icons/fa";
 import { useLanguage } from "../i18n/LanguageContext";
 import "./Services.css";
-
-const servicesData = [
-  {
-    id: "graphic-design",
-    icon: MdDesignServices,
-    accentColor: "#f97316",
-    gradientFrom: "rgba(249, 115, 22, 0.15)",
-    gradientTo: "rgba(249, 115, 22, 0.03)",
-    title: "Graphic Design",
-    tagline: "Creative visuals that tell your story",
-    items: [
-      "Logo design & brand identity",
-      "Business cards, flyers & brochures",
-      "Posters, banners & signage",
-      "Social media graphics & ads",
-      "Packaging & label design",
-      "Company profiles and marketing materials",
-    ],
-  },
-  {
-    id: "printing",
-    icon: MdPrint,
-    accentColor: "#1d6fe8",
-    gradientFrom: "rgba(29, 111, 232, 0.15)",
-    gradientTo: "rgba(29, 111, 232, 0.03)",
-    title: "Printing Services",
-    tagline: "High-quality prints for every need",
-    items: [
-      "Digital & offset printing",
-      "Large format printing (banners, roll-ups, posters)",
-      "Business stationery (cards, letterheads, envelopes)",
-      "Flyers, brochures, stickers",
-      "Branded merchandise (T-shirts, Caps, Mugs)",
-      "Packaging prints",
-    ],
-  },
-];
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -77,6 +36,29 @@ const Services = () => {
   const { t } = useLanguage();
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
 
+  const servicesData = [
+    {
+      id: "graphic-design",
+      icon: MdDesignServices,
+      accentColor: "#f97316",
+      gradientFrom: "rgba(249, 115, 22, 0.15)",
+      gradientTo: "rgba(249, 115, 22, 0.03)",
+      title: t("servicesDesignTitle"),
+      tagline: t("servicesDesignTagline"),
+      items: t("servicesDesignItems"),
+    },
+    {
+      id: "printing",
+      icon: MdPrint,
+      accentColor: "#1d6fe8",
+      gradientFrom: "rgba(29, 111, 232, 0.15)",
+      gradientTo: "rgba(29, 111, 232, 0.03)",
+      title: t("servicesPrintTitle"),
+      tagline: t("servicesPrintTagline"),
+      items: t("servicesPrintItems"),
+    },
+  ];
+
   return (
     <section id="services" className="services">
       {/* Background decorative orbs */}
@@ -92,14 +74,13 @@ const Services = () => {
           animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
         >
-          <span className="section-eyebrow">What We Do</span>
+          <span className="section-eyebrow">{t("servicesEyebrow")}</span>
           <h2 className="section-title">
-            Our Services
+            {t("servicesTitle")}
             <span className="title-underline" />
           </h2>
           <p className="section-subtitle">
-            From concept to print — we bring your brand to life with precision,
-            creativity, and quality.
+            {t("servicesSubtitle")}
           </p>
         </motion.div>
 
@@ -112,6 +93,8 @@ const Services = () => {
         >
           {servicesData.map((service) => {
             const Icon = service.icon;
+            const items = Array.isArray(service.items) ? service.items : [];
+            
             return (
               <motion.div
                 key={service.id}
@@ -152,7 +135,7 @@ const Services = () => {
                   initial="hidden"
                   animate={inView ? "visible" : "hidden"}
                 >
-                  {service.items.map((item, i) => (
+                  {items.map((item, i) => (
                     <motion.li
                       key={i}
                       className="service-item"

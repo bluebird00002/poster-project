@@ -32,8 +32,11 @@ const Portfolio = () => {
     if (path && path.toLowerCase().includes('bottles') || path && path.toLowerCase().includes('eafoods')) {
       return 'Bottle branding';
     }
-    if (path && path.toLowerCase().includes('business') || path && path.toLowerCase().includes('cards')) {
+    if (path && (path.toLowerCase().includes('business') || path.toLowerCase().includes('bussiness'))) {
       return 'Business cards';
+    }
+    if (path && path.toLowerCase().includes('cards')) {
+      return 'Identity Cards (IDs)';
     }
     if (path && path.toLowerCase().includes('notebook')) {
       return 'Notebooks';
@@ -56,8 +59,11 @@ const Portfolio = () => {
     if (path && path.toLowerCase().includes('badges')) {
       return 'Corporate Badges';
     }
-    if (path && path.toLowerCase().includes('onja') || path && path.toLowerCase().includes('wakala')) {
-      return 'Promotional Materials';
+    if (path && path.toLowerCase().includes('onja')) {
+      return 'Display Gondola';
+    }
+    if (path && path.toLowerCase().includes('wakala')) {
+      return 'Branding';
     }
     if (path && path.toLowerCase().includes('banner')) {
       return 'Roll up Banner';

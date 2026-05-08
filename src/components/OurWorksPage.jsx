@@ -102,8 +102,11 @@ const OurWorksPage = () => {
                   if (lowerPath.includes('bottles') || lowerPath.includes('eafoods')) {
                     return 'Bottle branding';
                   }
-                  if (lowerPath.includes('business') || lowerPath.includes('cards')) {
+                  if (lowerPath.includes('business') || lowerPath.includes('bussiness')) {
                     return 'Business cards';
+                  }
+                  if (lowerPath.includes('cards')) {
+                    return 'Identity Cards (IDs)';
                   }
                   if (lowerPath.includes('notebook')) {
                     return 'Notebooks';
@@ -126,8 +129,11 @@ const OurWorksPage = () => {
                   if (lowerPath.includes('badges')) {
                     return 'Corporate Badges';
                   }
-                  if (lowerPath.includes('onja') || lowerPath.includes('wakala')) {
-                    return 'Promotional Materials';
+                  if (lowerPath.includes('onja')) {
+                    return 'Display Gondola';
+                  }
+                  if (lowerPath.includes('wakala')) {
+                    return 'Branding';
                   }
                   if (lowerPath.includes('aqm36ks86p86hqs2u') || lowerPath.includes('secure')) {
                     return 'Indoor wall sign';
@@ -144,7 +150,7 @@ const OurWorksPage = () => {
                 const category = getCategory(item);
 
                 // Check if item is a video
-                const isVideo = typeof item === 'string' && item.match(/\.(mp4|webm)$/i);
+                const isVideo = typeof item === 'string' && item.split(/[?#]/)[0].match(/\.(mp4|webm)$/i);
 
                 // Create different animation sets
                 const animations = [
