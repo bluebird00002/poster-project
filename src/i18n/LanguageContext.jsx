@@ -51,7 +51,7 @@ const translations = {
     aboutVal5Desc: "Your brand goals guide our process.",
 
     servicesTitle: "Our Services",
-    servicesSubtitle: "From concept to print — we bring your brand to life with precision, creativity, and quality.",
+    servicesSubtitle: "From concept to print  we bring your brand to life with precision, creativity, and quality.",
     servicesEyebrow: "What We Do",
     servicesDesignTitle: "Graphic Design",
     servicesDesignTagline: "Creative visuals that tell your story",

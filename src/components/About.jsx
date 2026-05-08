@@ -88,7 +88,7 @@ const About = () => {
               
               <div className="about-stats">
                 <div className="stat-item">
-                  <span className="stat-num">500+</span>
+                  <span className="stat-num">100+</span>
                   <span className="stat-label">{t("aboutProjects")}</span>
                 </div>
                 <div className="stat-item">
