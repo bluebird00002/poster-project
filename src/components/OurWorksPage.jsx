@@ -96,7 +96,7 @@ const OurWorksPage = () => {
                   if (lowerPath.includes('aqm36ks86p86hqs2u') || lowerPath.includes('secure')) {
                     return 'Indoor wall sign';
                   }
-                  if (lowerPath.includes('legalbase') || lowerPath.includes('city solar lights') || lowerPath.includes('citylights') || lowerPath.includes('shikanimg') || lowerPath.includes('mspot') || lowerPath.includes('elegance')) {
+                  if (lowerPath.includes('legalbase') || lowerPath.includes('city solar lights') || lowerPath.includes('citylights') || lowerPath.includes('shikanimg') || lowerPath.includes('mspot')) {
                     return '3D luminous sign';
                   }
                   if (lowerPath.includes('bottles') || lowerPath.includes('eafoods')) {
@@ -118,7 +118,7 @@ const OurWorksPage = () => {
                     return 'Bags';
                   }
                   if (lowerPath.includes('goldenbanana') || lowerPath.includes('potatoking')) {
-                    return 'Gondola';
+                    return 'Gazebo';
                   }
                   if (lowerPath.includes('handbag')) {
                     return 'Promotional Bags';
@@ -250,4 +250,3 @@ const OurWorksPage = () => {
 };
 
 export default OurWorksPage;
-
